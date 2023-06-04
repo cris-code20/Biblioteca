@@ -1,8 +1,10 @@
 ﻿
 
+using Biblioteca.Infrestructure.Core;
+
 namespace Biblioteca.Infrestructure.Entitis
 {
-    public class Prestamo
+    public class Prestamo : BaseEntity
     {
         public int IdPrestamo { get; set; }
         public string ? Codigo { get; set; }

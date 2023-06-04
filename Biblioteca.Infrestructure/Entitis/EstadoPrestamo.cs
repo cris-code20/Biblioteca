@@ -1,8 +1,10 @@
 ﻿
 
+using Biblioteca.Infrestructure.Core;
+
 namespace Biblioteca.Infrestructure.Entitis
 {
-    internal class EstadoPrestamo
+    public class EstadoPrestamo : BaseEntity
     {
         public int IdEstadoPrestamo { get; set; }
         public string ? Descripcion { get; set; }
