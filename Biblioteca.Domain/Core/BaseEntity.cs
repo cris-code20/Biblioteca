@@ -1,6 +1,6 @@
 ﻿
 
-namespace Biblioteca.Infrestructure.Core
+namespace Biblioteca.Domain.Core
 {
     public abstract class BaseEntity
     {

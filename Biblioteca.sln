@@ -3,17 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca-web", "Biblioteca-web\Biblioteca-web.csproj", "{E3DF6A99-CB53-4B74-A88A-E9238C4347F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca-web", "Biblioteca-web\Biblioteca-web.csproj", "{E3DF6A99-CB53-4B74-A88A-E9238C4347F9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47898FA6-1FB4-4A8D-BBB3-48288101E8C5} = {47898FA6-1FB4-4A8D-BBB3-48288101E8C5}
+		{5CDCB293-888C-4915-A860-8D33F38F50DD} = {5CDCB293-888C-4915-A860-8D33F38F50DD}
+		{5CF90EFD-FB07-435E-A79B-06DDC98FC33F} = {5CF90EFD-FB07-435E-A79B-06DDC98FC33F}
+		{BEDEFDFF-E60B-43EE-9A7D-C04B35F8593A} = {BEDEFDFF-E60B-43EE-9A7D-C04B35F8593A}
+		{C25F7824-657A-48E1-A6F0-6A7FD3F0B5AE} = {C25F7824-657A-48E1-A6F0-6A7FD3F0B5AE}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Infrestructure", "Biblioteca.Infrestructure\Biblioteca.Infrestructure.csproj", "{47898FA6-1FB4-4A8D-BBB3-48288101E8C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Infrestructure", "Biblioteca.Infrestructure\Biblioteca.Infrestructure.csproj", "{47898FA6-1FB4-4A8D-BBB3-48288101E8C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Application", "Biblioteca.Application\Biblioteca.Application.csproj", "{C25F7824-657A-48E1-A6F0-6A7FD3F0B5AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Application", "Biblioteca.Application\Biblioteca.Application.csproj", "{C25F7824-657A-48E1-A6F0-6A7FD3F0B5AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Api", "Biblioteca.Api\Biblioteca.Api.csproj", "{5CF90EFD-FB07-435E-A79B-06DDC98FC33F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Api", "Biblioteca.Api\Biblioteca.Api.csproj", "{5CF90EFD-FB07-435E-A79B-06DDC98FC33F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.Domain", "Biblioteca.Domain\Biblioteca.Domain.csproj", "{BEDEFDFF-E60B-43EE-9A7D-C04B35F8593A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.Domain", "Biblioteca.Domain\Biblioteca.Domain.csproj", "{BEDEFDFF-E60B-43EE-9A7D-C04B35F8593A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biblioteca.IOC", "Biblioteca.IOC\Biblioteca.IOC.csproj", "{5CDCB293-888C-4915-A860-8D33F38F50DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca.IOC", "Biblioteca.IOC\Biblioteca.IOC.csproj", "{5CDCB293-888C-4915-A860-8D33F38F50DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,8 +1,6 @@
-﻿
+﻿using Biblioteca.Domain.Core;
 
-using Biblioteca.Infrestructure.Core;
-
-namespace Biblioteca.Infrestructure.Entitis
+namespace Biblioteca.Domain.Entitis
 {
     public class Prestamo : BaseEntity
     {

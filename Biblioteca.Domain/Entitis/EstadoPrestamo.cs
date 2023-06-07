@@ -1,8 +1,8 @@
 ﻿
 
-using Biblioteca.Infrestructure.Core;
+using Biblioteca.Domain.Core;
 
-namespace Biblioteca.Infrestructure.Entitis
+namespace Biblioteca.Domain.Entitis
 {
     public class EstadoPrestamo : BaseEntity
     {
