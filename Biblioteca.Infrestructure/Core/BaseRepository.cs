@@ -31,12 +31,12 @@ namespace Biblioteca.Infrestructure.Core
             throw new NotImplementedException();
         }
 
-        void LectorRepositories<TEntity>.Save(TEntity entity)
+        void LectorRepositories<TEntity>.Add(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        void LectorRepositories<TEntity>.Save(TEntity[] entities)
+        void LectorRepositories<TEntity>.Add(TEntity[] entities)
         {
             throw new NotImplementedException();
         }
