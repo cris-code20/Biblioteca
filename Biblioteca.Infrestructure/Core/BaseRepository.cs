@@ -1,52 +1,55 @@
-﻿using Biblioteca.Infrestructure.Context;
-using Biblioteca.Infrestructure.Repositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Biblioteca.Domain.Repository;
+using Biblioteca.Infrestructure.Context;
 using System.Linq.Expressions;
 
 
 namespace Biblioteca.Infrestructure.Core
 {
-    internal class BaseRepository<TEntity> : PresatamoRepositories<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IRepositoriobase<TEntity> where TEntity : class
     {
-        private readonly BibliotecaContext biblioteca; 
-        private readonly DbSet<TEntity> entities;
-        public BaseRepository(BibliotecaContext biblioteca) 
+        public BaseRepository(BibliotecaContext context)
         {
-            this.biblioteca = biblioteca;
-            this.entities = this.biblioteca.Set<TEntity>();
-        }
-        public void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
+            Context = context;
         }
 
-        public bool Exists(Expression<Func<TEntity, bool>> filter)
-        {
+        public BibliotecaContext Context { get; }
 
-            return this.entities.Any(filter);
-        }
-
-        public IEnumerable<TEntity> GetEntities()
+        public object GetEntities()
         {
             throw new NotImplementedException();
         }
 
-        public TEntity GetEntity(int entityid)
+        void IRepositoriobase<TEntity>.Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Save(TEntity entity)
+        bool IRepositoriobase<TEntity>.Exists(Expression<Func<TEntity, bool>> filter)
         {
             throw new NotImplementedException();
         }
 
-        public void Save(TEntity[] entities)
+        IEnumerable<TEntity> IRepositoriobase<TEntity>.GetEntities()
         {
             throw new NotImplementedException();
         }
 
-        public void update(TEntity entity)
+        TEntity IRepositoriobase<TEntity>.GetEntity(int entityid)
+        {
+            throw new NotImplementedException();
+        }
+
+         void IRepositoriobase<TEntity>.Add(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepositoriobase<TEntity>.Add(TEntity[] entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepositoriobase<TEntity>.update(TEntity entity)
         {
             throw new NotImplementedException();
         }
