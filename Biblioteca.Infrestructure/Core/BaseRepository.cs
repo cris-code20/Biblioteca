@@ -1,49 +1,72 @@
-﻿using Biblioteca.Infrestructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Biblioteca.Domain.Repository;
+using Biblioteca.Infrestructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Infrestructure.Core
 {
-    internal class BaseRepository<TEntity> : LectorRepositories<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> : IRepositoryBaseLector<TEntity> where TEntity : class
     {
-        void LectorRepositories<TEntity>.Delete(TEntity entity)
+
+        private readonly Bibliotecacontext context;
+        private readonly DbSet<TEntity> myDbset;
+
+        public BaseRepository(Bibliotecacontext context)
         {
-            throw new NotImplementedException();
-        }
-        
-        bool LectorRepositories<TEntity>.Exists(Expression<Func<TEntity, bool>> filter)
-        {
-            throw new NotImplementedException();
+            this.context = context;
+            this.myDbset = this.context.Set<TEntity>();
         }
 
-        IEnumerable<TEntity> LectorRepositories<TEntity>.GetEntities()
+
+        public virtual void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.myDbset.Add(entity);
         }
 
-        TEntity LectorRepositories<TEntity>.GetEntity(int entityid)
+        public virtual void Add(TEntity[] entities)
         {
-            throw new NotImplementedException();
+            this.myDbset.AddRange(entities);
         }
 
-        void LectorRepositories<TEntity>.Add(TEntity entity)
+        public virtual List<TEntity> GetEntities()
         {
-            throw new NotImplementedException();
+            return this.myDbset.ToList();
         }
 
-        void LectorRepositories<TEntity>.Add(TEntity[] entities)
+        public virtual TEntity GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return this.myDbset.Find(id);
         }
 
-        void LectorRepositories<TEntity>.update(TEntity entity)
+        public virtual void remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.myDbset.Remove(entity);
+        }
+
+        public virtual void remove(TEntity[] entities)
+        {
+            this.myDbset.RemoveRange(entities);
+        }
+
+        public virtual void SaveChanges()
+        {
+            this.context.SaveChanges();
+        }
+
+        public virtual void update(TEntity entity)
+        {
+            this.myDbset.Update(entity);
+        }
+
+        public virtual void update(TEntity[] entities)
+        {
+            this.myDbset.UpdateRange(entities);
+        }
+
+        public virtual bool Exists(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.myDbset.Any(filter);
         }
     }
 }

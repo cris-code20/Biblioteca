@@ -1,44 +1,50 @@
 ﻿using Biblioteca.Domain.Entities;
 using Biblioteca.Infrestructure.Context;
 using Biblioteca.Infrestructure.Core;
-using Biblioteca.Infrestructure.Exceptions;
+using Biblioteca.Infrestructure.Exceptiones;
 using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Module;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+
 
 namespace Biblioteca.Infrestructure.Repositories
 {
     public class LectorRepositories : BaseRepository<Lector>, ILector
     {
 
-        public ILogger<LectorRepositories> logger { get; private set; }
-        public BibliotecaContext context { get; }
+        readonly ILogger<LectorRepositories> logger;
+        readonly Bibliotecacontext context;
 
-        public LectorRepositories(ILogger<LectorRepositories> logger, BibliotecaContext context) : base(context)
+        public LectorRepositories(ILogger<LectorRepositories> logger, Bibliotecacontext context) : base(context)
         {
             this.logger = logger;
             this.context = context;
         }
 
 
-        List<LectorModels> ILector.GetPrestamos(int IdLector)
+        List<LectorModel> ILector.GetLector(int IdLector)
         {
-            List<prestamoModels> prestamos = new List<LectorModel>();
+            List<LectorModel> Lector = new List<LectorModel>();
             try
             {
                 this.logger.LogInformation($"Pase poraqui: {IdLector}");
 
-                var query = select new LectorModel()
-                {
-                    IdLector = IdLector,
-                    Codigo = Codigo
-                };
+                Lector = (from pres in base.GetEntities()
+                             join es in context.lector.ToList() on pres.IdLector equals es.IdLector
+                          where pres.IdLector == IdLector
+                          select new LectorModel()
+                             {
+                                 IdLector = pres.IdLector,
+                                 Codigo = pres.Codigo,
+
+                             }).ToList();
             }
             catch (Exception ex)
             {
-                this.logger.LogError($"Error obteniedo los Lectores: {ex.Message}", ex.ToString());
+                this.logger.LogError($"Error obteniedo los lectores: {ex.Message}", ex.ToString());
             }
+
+            return Lector;
         }
 
         public override void Add(Lector entity)
