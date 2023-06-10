@@ -6,12 +6,8 @@ using Biblioteca.Infrestructure.Core;
 
 namespace Biblioteca.Infrestructure.Repositories
 {
-    public class EstadoprestamoRepositories : BaseRepository<EstadoPrestamo>, IestadoPrestamo
+    public class EstadoprestamoRepositories 
     {
-        public EstadoprestamoRepositories() { }
-        List<EstadoPrestamo> IestadoPrestamo.GetEstadoPrestamos(int IdEstadoPrestamo)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }

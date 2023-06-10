@@ -9,11 +9,14 @@ namespace Biblioteca.Domain.Repository
         void Add(TEntity entity);
         void Add(TEntity[] entities);
         void update(TEntity entity);
-        void Delete(TEntity entity);
-        TEntity GetEntity(int entityid);
+        void update(TEntity[] entity);
+        void remove(TEntity entity);
+        void remove(TEntity[] entity);
+        TEntity GetEntity(int id);
+        List<TEntity> GetEntities();
         bool Exists(Expression<Func<TEntity, bool>> filter);
-        IEnumerable<TEntity> GetEntities();
 
+        void SaveChanges();
 
     }
 }

@@ -1,57 +1,72 @@
 ﻿using Biblioteca.Domain.Repository;
 using Biblioteca.Infrestructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 
 namespace Biblioteca.Infrestructure.Core
 {
-    public class BaseRepository<TEntity> : IRepositoriobase<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> : IRepositoriobase<TEntity> where TEntity : class
     {
+
+        private readonly BibliotecaContext context;
+        private readonly DbSet<TEntity> myDbset;
+
         public BaseRepository(BibliotecaContext context)
+    {
+        this.context = context;
+        this.myDbset = this.context.Set<TEntity>();
+    }
+
+       
+        public virtual void Add(TEntity entity)
         {
-            Context = context;
+            this.myDbset.Add(entity);
         }
 
-        public BibliotecaContext Context { get; }
-
-        public object GetEntities()
+        public virtual void Add(TEntity[] entities)
         {
-            throw new NotImplementedException();
+            this.myDbset.AddRange(entities);
         }
 
-        void IRepositoriobase<TEntity>.Delete(TEntity entity)
+        public virtual List<TEntity> GetEntities()
         {
-            throw new NotImplementedException();
+            return this.myDbset.ToList();
         }
 
-        bool IRepositoriobase<TEntity>.Exists(Expression<Func<TEntity, bool>> filter)
+        public virtual TEntity GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return this.myDbset.Find(id);
         }
 
-        IEnumerable<TEntity> IRepositoriobase<TEntity>.GetEntities()
+       public virtual void remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.myDbset.Remove(entity);    
         }
 
-        TEntity IRepositoriobase<TEntity>.GetEntity(int entityid)
+        public virtual void remove(TEntity[] entities)
         {
-            throw new NotImplementedException();
+            this.myDbset.RemoveRange(entities);
         }
 
-         void IRepositoriobase<TEntity>.Add(TEntity entity)
+        public virtual void SaveChanges()
         {
-            throw new NotImplementedException();
+            this.context.SaveChanges();
         }
 
-        void IRepositoriobase<TEntity>.Add(TEntity[] entities)
+        public virtual void update(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.myDbset.Update(entity);
         }
 
-        void IRepositoriobase<TEntity>.update(TEntity entity)
+        public virtual void update(TEntity[] entities)
         {
-            throw new NotImplementedException();
+            this.myDbset.UpdateRange(entities);
+        }
+
+        public virtual bool Exists(Expression<Func<TEntity, bool>> filter)
+        {
+            return this.myDbset.Any(filter);
         }
     }
 }
