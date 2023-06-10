@@ -36,7 +36,7 @@ namespace Biblioteca.Infrestructure.Core
 
         public virtual TEntity GetEntity(int id)
         {
-            return this.myDbset.Find(id);
+            return myDbset.Find(id);
         }
 
        public virtual void remove(TEntity entity)

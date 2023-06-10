@@ -1,3 +1,8 @@
+using Biblioteca.Infrestructure.Context;
+using Biblioteca.Infrestructure.Interface;
+using Biblioteca.Infrestructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +11,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddDbContext<BibliotecaContext>(options => options.UseSqlServer
+                                                (builder.Configuration.GetConnectionString("BibliotecaContext")));
+
+
+
+builder.Services.AddTransient<IestadoPrestamo, EstadoprestamoRepositories>();
+builder.Services.AddTransient<IprestamosRepository, PresatamoRepositories>();
+
 
 var app = builder.Build();
 
@@ -21,3 +36,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+

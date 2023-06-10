@@ -51,9 +51,8 @@ namespace Biblioteca.Infrestructure.Repositories
         public override void Add(Prestamo entity)
         {
             if (this.Exists(cd => cd.IdEstadoPrestamo == entity.IdEstadoPrestamo)) 
-            {
-                throw new PrestamoException("");
-            }
+                throw new PrestamoException("YA solicioto un prestamo");
+           
 
 
             base.SaveChanges();

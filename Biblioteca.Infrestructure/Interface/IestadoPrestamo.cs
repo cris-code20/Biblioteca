@@ -5,6 +5,6 @@ namespace Biblioteca.Infrestructure.Interface
 {
     public interface  IestadoPrestamo : IRepositoriobase<EstadoPrestamo>
     {
-        List<EstadoPrestamo> GetEstadoPrestamos(int IdEstadoPrestamo);
+       
     }
 }
