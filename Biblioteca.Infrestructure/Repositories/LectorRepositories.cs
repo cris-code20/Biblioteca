@@ -1,10 +1,14 @@
-﻿using Biblioteca.Domain.Entities;
-using Biblioteca.Infrestructure.Context;
-using Biblioteca.Infrestructure.Core;
-using Biblioteca.Infrestructure.Exceptiones;
-using Biblioteca.Infrestructure.Interface;
-using Biblioteca.Infrestructure.Module;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Biblioteca.Domain.Entities;
+using Biblioteca.Domain.Repository;
+using Biblioteca.Infrastructure.Context;
+using Biblioteca.Infrastructure.Core;
+using Biblioteca.Infrastructure.Exceptions;
+using Biblioteca.Infrastructure.Interfaces;
+using Biblioteca.Infrastructure.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Biblioteca.Infrestructure.Repositories
