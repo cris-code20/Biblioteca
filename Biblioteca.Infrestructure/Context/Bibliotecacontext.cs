@@ -9,6 +9,6 @@ namespace Biblioteca.Infrestructure.Context
         {
         }
         public Bibliotecacontext(DbContextOptions<Bibliotecacontext> options) : base(options) { }
-        public DbSet<Lector> Lectores { get; set; }   
+        public DbSet<Lector> Lector { get; set; }   
     }
 }
