@@ -22,42 +22,102 @@ namespace Biblioteca.Infrestructure.Repositories
         }
 
 
-        List<prestamoModels> IprestamosRepository.GetPrestamos(int IdEstadoPrestamo)
+        public override void Add(Prestamo entity)
         {
-            List< prestamoModels > prestamos = new List<prestamoModels>();
+            if (this.Exists(pres => pres.IdPrestamo == entity.IdPrestamo)) 
+            {
+                throw new PrestamoException("Ya existe este prestamo");
+            }
+
+            base.Add(entity);
+            base.SaveChanges();
+        }
+
+        public override void update(Prestamo entity)
+        {
             try
             {
-                this.logger.LogInformation($"Pase poraqui: {IdEstadoPrestamo}");
+                Prestamo prestamoToUpdate = this.GetEntity(entity.IdPrestamo);
 
-                prestamos = (from pres in base.GetEntities()
-                            join es in context.estado.ToList() on pres.IdEstadoPrestamo equals es.IdEstadoPrestamo
-                             where pres.IdEstadoPrestamo == IdEstadoPrestamo
-                             select new prestamoModels()
-                             {
-                                 IdPrestamo = pres.IdPrestamo,
-                                 Codigo = pres.Codigo,
-                                 IdEstadoPrestamo = es.IdEstadoPrestamo,
+                prestamoToUpdate.IdPrestamo = entity.IdPrestamo;
+                prestamoToUpdate.Codigo = entity.Codigo;
+                prestamoToUpdate.EstadoEntregado = entity.EstadoEntregado;
+                prestamoToUpdate.EstadoRecibido = entity.EstadoRecibido;
+                prestamoToUpdate.FechaCreacion = entity.FechaCreacion;
+                prestamoToUpdate.FechaDevolucion = entity.FechaDevolucion;
+                prestamoToUpdate.FechaConfirmacionDevolucion = entity.FechaConfirmacionDevolucion;
 
-                             }).ToList();
+                this.context.Prestamos.Update(prestamoToUpdate);
+                this.context.SaveChanges();
             }
             catch (Exception ex)
             {
-                this.logger.LogError($"Error obteniedo los prestamos: {ex.Message }", ex.ToString());
+                this.logger.LogError("Error no puedes actualizar el prestamo", ex.ToString());
+            }
+        }
+
+        public override void remove(Prestamo entity)
+        {
+            try
+            {
+                Prestamo prestamoToRemove = this.GetEntity(entity.IdPrestamo);
+
+                
+            }
+            catch (Exception ex) 
+            {
+                this.logger.LogError("Error no puedes Eliminar el prestamo", ex.ToString());
+
+            }
+        }
+
+        public prestamoModels GetPrestamoById(int id)
+        {
+            prestamoModels prestamoModelss = new prestamoModels();
+
+            try
+            {
+                Prestamo prestamo = this.GetEntity(id);
+
+                prestamoModelss.IdPrestamo = prestamo.IdPrestamo;
+                prestamoModelss.IdEstadoPrestamo = prestamo.IdPrestamo;
+                prestamoModelss.Codigo = prestamo.Codigo;
+                prestamoModelss.IdLibro = prestamo.IdLibro;
+               
+            }
+            catch(Exception ex) 
+            {
+                this.logger.LogError("Error no puedes obtener el prestamo", ex.ToString());
+
+            }
+
+            return prestamoModelss;
+        }
+
+        public List<prestamoModels> GetPrestamos(int IdPrestamo)
+        {
+            List<prestamoModels> prestamos = new();
+
+            try
+            {
+                prestamos = this.context.Prestamos
+                    .Select(pre => new prestamoModels()
+                    {
+                        IdPrestamo = pre.IdPrestamo,
+                        IdEstadoPrestamo = pre.IdEstadoPrestamo,
+                        IdLibro = pre.IdLibro,
+                        IdLector = pre.IdLector
+                    }).ToList();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError("Error no puedes obtener el prestamo", ex.ToString());
+
             }
 
             return prestamos;
         }
 
-        public override void Add(Prestamo entity)
-        {
-            if (this.Exists(cd => cd.IdEstadoPrestamo == entity.IdEstadoPrestamo)) 
-                throw new PrestamoException("YA solicioto un prestamo");
-           
-
-
-            base.SaveChanges();
-        }
-
-    
+       
     }
 }

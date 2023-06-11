@@ -13,5 +13,6 @@ namespace Biblioteca.Domain.Entitis
         public DateTime FechaConfirmacionDevolucion { get; set; }
         public string ? EstadoEntregado  { get; set; }
         public string ? EstadoRecibido { get; set; }
+       
     }
 }

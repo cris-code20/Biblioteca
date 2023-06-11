@@ -11,7 +11,7 @@ namespace Biblioteca.Infrestructure.Context
 
         public BibliotecaContext(DbContextOptions<BibliotecaContext> options) : base(options) { }
 
-        public DbSet<Prestamo> prestamos { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
         public DbSet<EstadoPrestamo> estado { get; set; }
     }
 }
