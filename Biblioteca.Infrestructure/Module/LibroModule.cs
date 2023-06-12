@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Biblioteca.Infrestructure.Module
 {
-    internal class LibroModule
+    public class LibroModels
     {
+        public int IdLibro { get; set; }
+        public string? Titulo { get; set; }
+        public string? Autor { get; set; }
+        public string? Editorial { get; set; }
+        public string? Ejemplares { get; set; }
+        public int Portadas { get; set; }
+
+
+
     }
 }

@@ -1,19 +1,23 @@
 ﻿
 using System.Linq.Expressions;
 
-namespace Biblioteca.Infrestructure.Repositories
+namespace Biblioteca.Domain.Repositories
 {
    
-        public interface LibroRepositories<TEntity> where TEntity : class
+        public interface Irepository<TEntity> where TEntity : class
         {
-            void Save(TEntity entity);
-            void Save(TEntity[] entities);
-            void update(TEntity entity);
-            void Delete(TEntity entity);
-            TEntity GetEntity(int entityid);
-            bool Exists(Expression<Func<TEntity, bool>> filter);
-            IEnumerable<TEntity> GetEntities();
+        void Add(TEntity entity);
+        void Add(TEntity[] entities);
+        void update(TEntity entity);
+        void update(TEntity[] entity);
+        void remove(TEntity entity);
+        void remove(TEntity[] entity);
+        TEntity GetEntity(int id);
+        List<TEntity> GetEntities();
+        bool Exists(Expression<Func<TEntity, bool>> filter);
 
-        }
+        void SaveChanges();
+
+    }
     
 }

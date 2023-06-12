@@ -5,11 +5,7 @@ using Biblioteca.Infrestructure.Excepcion;
 using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Module;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Biblioteca.Infrestructure.Repositories
 {
@@ -98,21 +94,23 @@ namespace Biblioteca.Infrestructure.Repositories
             return LibroModelss;
         }
 
-        public List<LibroModels> GetPrestamos(int IdLibro, object li)
+        List<LibroModels> ILibroRepository.GetLibro(int IdLibro)
         {
+            
+
             List<LibroModels> Libro = new();
 
             try
             {
                 Libro = this.context.Libro
-                    .Select(pre => new LibroModels()
+                    .Select(li => new LibroModels()
                     {
                         IdLibro = li.IdLibro,
                         Titulo = li.Titulo,
-                        Autor = li.Autor,
+                        Autor = li.autor,
                         Editorial = li.Editorial,
                         Ejemplares = li.Ejemplares,
-                        Portadas = li.Portadas
+                        Portadas = li.Portada
 
 
                     }).ToList();
@@ -126,9 +124,6 @@ namespace Biblioteca.Infrestructure.Repositories
             return Libro;
         }
 
-        public List<LibroModels> GetLibro(int IdLibro)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
+

@@ -12,7 +12,7 @@ namespace Biblioteca.Infrestructure.Entitis
         public int IdCategoria { get; set; }
         public string? Editorial { get; set; }
         public string? Ubicacion { get; set; }
-        public int Ejemplares { get; set; }
+        public string? Ejemplares { get; set; }
         public byte Portada { get; set; }
         public int Estado { get; set; }
         public DateTime FechaCreacion { get; set; }

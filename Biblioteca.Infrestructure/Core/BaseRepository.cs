@@ -20,7 +20,7 @@ namespace Biblioteca.Infrestructure.Core
 
         }
 
-        public void Add(TEntity entity)
+        public virtual void Add(TEntity entity)
         {
            this.myDbs.Add(entity);
         }
