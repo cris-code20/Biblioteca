@@ -1,48 +1,73 @@
-﻿using Biblioteca.Infrestructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Biblioteca.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Biblioteca.Infrestructure.Context;
+
 
 namespace Biblioteca.Infrestructure.Core
 {
-    internal class BaseReposiroty<TEntity> : LibroRepositories<TEntity> where TEntity : class
+    public abstract class BaseReposiroty<TEntity> : Irepository<TEntity> where TEntity : class
     {
-        void LibroRepositories<TEntity>.Delete(TEntity entity)
+   
+        private readonly  Bibliotecacontext Context;
+
+            private readonly DbSet<TEntity> myDbs;
+
+        public BaseReposiroty(Bibliotecacontext context)
         {
-            throw new NotImplementedException();
+            this.Context=context;
+            this.myDbs = this.Context.Set<TEntity>();
+
         }
 
-        bool LibroRepositories<TEntity>.Exists(Expression<Func<TEntity, bool>> filter)
+        public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+           this.myDbs.Add(entity);
         }
 
-        IEnumerable<TEntity> LibroRepositories<TEntity>.GetEntities()
+        public virtual void Add(TEntity[] entities)
         {
-            throw new NotImplementedException();
+            this.myDbs.AddRange(entities);
         }
 
-        TEntity LibroRepositories<TEntity>.GetEntity(int entityid)
+        public virtual  bool Exists(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            return this.myDbs.Any(filter);
         }
 
-        void LibroRepositories<TEntity>.Save(TEntity entity)
+        public virtual  List<TEntity> GetEntities()
         {
-            throw new NotImplementedException();
+            return this.myDbs.ToList();
         }
 
-        void LibroRepositories<TEntity>.Save(TEntity[] entities)
+        public virtual  TEntity GetEntity(int id)
         {
-            throw new NotImplementedException();
+            return myDbs.Find(id);
         }
 
-        void LibroRepositories<TEntity>.update(TEntity entity)
+        public virtual void remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            this.myDbs.Remove(entity);
+        }
+
+        public virtual void remove(TEntity[] entity)
+        {
+            this.myDbs.RemoveRange(entity);
+        }
+
+        public virtual void SaveChanges()
+        {
+            this.Context.SaveChange();
+        }
+
+        public virtual void update(TEntity entity)
+        {
+           this.myDbs.Update(entity);
+        }
+
+        public virtual void update(TEntity[] entity)
+        {
+            this.myDbs.UpdateRange(entity);
         }
     }
 }

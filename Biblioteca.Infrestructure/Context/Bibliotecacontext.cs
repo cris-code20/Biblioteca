@@ -13,7 +13,11 @@ namespace Biblioteca.Infrestructure.Context
 
         public Bibliotecacontext(DbContextOptions<Bibliotecacontext> options) : base(options) { }
 
-        public DbSet<Libro> Libros { get; set; }
+        public DbSet<Libro> Libro { get; set; }
 
+        internal void SaveChange()
+        {
+            throw new NotImplementedException();
+        }
     }
 } 
