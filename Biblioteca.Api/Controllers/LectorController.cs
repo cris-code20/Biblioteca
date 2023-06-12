@@ -15,7 +15,7 @@ namespace Biblioteca.Api.Controllers
             this.LectorRepository = LectorRepository;
         }
 
-        // GET: api/<PrestamoController>
+        // GET: api/<LectorController>
         [HttpGet]
         public IActionResult Get()
         {
@@ -23,26 +23,26 @@ namespace Biblioteca.Api.Controllers
             return Ok(LectorRepository);
         }
 
-        // GET api/<PrestamoController>/5
+        // GET api/<LectorController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<PrestamoController>
+        // POST api/<LectorController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<PrestamoController>/5
+        // PUT api/<LectorController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<PrestamoController>/5
+        // DELETE api/<LectorController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
