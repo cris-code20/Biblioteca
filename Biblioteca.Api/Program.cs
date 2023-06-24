@@ -3,7 +3,7 @@ using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 

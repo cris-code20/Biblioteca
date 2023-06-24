@@ -16,7 +16,8 @@ namespace Biblioteca.Infrestructure.Core
         public BaseRepository(BibliotecaContext context)
     {
         this.context = context;
-        this.myDbset = this.context.Set<TEntity>();
+            var entities = this.context.Set<TEntity>();
+            myDbset = entities;
     }
 
        
@@ -52,7 +53,7 @@ namespace Biblioteca.Infrestructure.Core
 
         public virtual void SaveChanges()
         {
-            this.context.SaveChanges();
+            this.context.SaveChanges(); 
         }
 
         public virtual void update(TEntity entity)

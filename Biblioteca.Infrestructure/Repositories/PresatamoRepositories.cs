@@ -24,7 +24,7 @@ namespace Biblioteca.Infrestructure.Repositories
 
         public override void Add(Prestamo entity)
         {
-            if (this.Exists(pres => pres.IdPrestamo == entity.IdPrestamo)) 
+            if (this.Exists(pres => pres.IdPrestamo == entity.IdPrestamo))  
             {
                 throw new PrestamoException("Ya existe este prestamo");
             }
