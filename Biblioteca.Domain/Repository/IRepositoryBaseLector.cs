@@ -1,8 +1,7 @@
-﻿using System;
-
+﻿using System.Linq.Expressions;
 namespace Biblioteca.Domain.Repository
-
-public interface IRepositoryBaseLector<TEntity> where TEntity : class
+{
+    public interface IRepositoryBaseLector<TEntity> where TEntity : class
 {
     void Add(TEntity entity);
     void Add(TEntity[] entity);
@@ -11,4 +10,6 @@ public interface IRepositoryBaseLector<TEntity> where TEntity : class
     TEntity GetEntity(int entityid);
     bool Exists(Expression<Func<TEntity, bool>> filter);
     IEnumerable<TEntity> GetEntities();
+    List<Infrestructure.Module.LectorModel> GetLector(int IdLector);
+}
 }

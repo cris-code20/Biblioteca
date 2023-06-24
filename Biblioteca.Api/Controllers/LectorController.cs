@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Biblioteca.Infrestructure.Interface;
+﻿using Biblioteca.Infrestructure.Interface;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteca.Api.Controllers
 {

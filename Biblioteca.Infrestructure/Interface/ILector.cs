@@ -1,17 +1,11 @@
-﻿using Biblioteca.Domain.Entities;
+﻿using Biblioteca.Infrestructure.Module;
 using Biblioteca.Domain.Repository;
-using Biblioteca.Infrestructure.Module;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Biblioteca.Infrestructure.Entities;
 
 namespace Biblioteca.Infrestructure.Interface
 {
-    public interface ILector : IRepositoriobase<Lector>
+    public interface ILector : IRepositoryBaseLector<Lector>
     {
         List<Lector> GetLector(int Lector);
-        List<LectorModel> GetLector(int IdLector);
     }
 }
