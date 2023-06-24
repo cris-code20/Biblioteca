@@ -75,7 +75,28 @@ namespace Biblioteca.Application.Service
 
         public ServiceResult Remove(LectorRemoveDto model)
         {
-            throw new NotImplementedException();
+            ServiceResult result = new ServiceResult()
+            try
+            {
+                this.LectorRepository.Remove(new Lector)
+                {
+                    LectorId = model.LectorId,
+                    Deleted = model.Deleted, 
+                    DeletedDate = model.ChangeDate, 
+                    UserDeleted = model.ChangeUser
+                });
+                result.Message = "Departamento eliminado correctamente.";
+            }
+            catch (Exception ex)
+            {
+
+                result.Success = false;
+                result.Message = "Error guardando el departamento.";
+                this.logger.LogError($"{result.Message}", ex.ToString());
+            }
+
+            return result;
+
         }
 
         public ServiceResult Save(LectorAddDto model)
@@ -118,7 +139,7 @@ namespace Biblioteca.Application.Service
             }
 
 
-            if (string.IsNullOrEmpty(model.Correo)
+            if (string.IsNullOrEmpty(model.Correo))
             {
                 result.Message = "El correo del lector es requerido.";
                 result.Success = false;
@@ -132,7 +153,7 @@ namespace Biblioteca.Application.Service
                 return result;
             }
 
-            if (string.IsNullOrEmpty(model.Clave)
+            if (string.IsNullOrEmpty(model.Clave))
             {
                 result.Message = "La clave del lector es requerido.";
                 result.Success = false;
