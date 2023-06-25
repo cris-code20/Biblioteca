@@ -9,5 +9,6 @@ namespace Biblioteca.Application.Dtos.Prestamo
     {
         public int IdPrestamo { get; set; }
         public bool Delete { get; set; }
+        public int IdEstadoPrestamo { get; internal set; }
     }
 }

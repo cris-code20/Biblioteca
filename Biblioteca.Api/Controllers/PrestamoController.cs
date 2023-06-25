@@ -1,5 +1,7 @@
-﻿using Biblioteca.Infrestructure.Interface;
+﻿
+using Biblioteca.Application.Contract;
 using Microsoft.AspNetCore.Mvc;
+using Biblioteca.Application.Dtos.Prestamo;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,44 +11,52 @@ namespace Biblioteca.Api.Controllers
     [ApiController]
     public class PrestamoController : ControllerBase
     {
-        private readonly IprestamosRepository prestamosRepository;
+        private readonly IPrestamoService prestamoService;
 
-        public PrestamoController(IprestamosRepository prestamosRepository) 
+        public PrestamoController(IPrestamoService prestamoService) 
         {
-            this.prestamosRepository = prestamosRepository;
+            this.prestamoService = prestamoService;
         }
 
         // GET: api/<PrestamoController>
         [HttpGet]
         public IActionResult Get()
         {
-            var prestamosRepository = this.prestamosRepository.GetEntities();
-            return Ok(prestamosRepository);
+            var prestamo = this.prestamoService.Get();
+            return Ok(prestamo);
         }
 
         // GET api/<PrestamoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public  IActionResult Get(int id)
         {
-            return "value";
+            var prestamo = this.prestamoService.GetById(id);
+            return Ok(prestamo);
         }
 
         // POST api/<PrestamoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Save")]
+        public IActionResult Post([FromBody] PrestamoAddDto prestamoAdd)
         {
+            var result = this.prestamoService.Save(prestamoAdd);
+            return Ok(result);
         }
 
         // PUT api/<PrestamoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("Update")]
+        public IActionResult Put([FromBody] PrestamoUpdateDto prestamoUpdate )
         {
+            var result = this.prestamoService.Uppdate(prestamoUpdate);
+            return Ok(result);
+
         }
 
         // DELETE api/<PrestamoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost("Remove")]
+        public IActionResult Delete([FromBody] PrestamoRemoveDto prestamoRemove )
         {
+            var result = this.prestamoService.Remove(prestamoRemove);
+            return Ok(result);
         }
     }
 }

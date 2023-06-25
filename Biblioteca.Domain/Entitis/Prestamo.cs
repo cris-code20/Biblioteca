@@ -4,6 +4,8 @@ namespace Biblioteca.Domain.Entitis
 {
     public class Prestamo : BaseEntity
     {
+        public bool Deleted;
+
         public int IdPrestamo { get; set; }
         public string ? Codigo { get; set; }
         public int IdEstadoPrestamo { get; set; }

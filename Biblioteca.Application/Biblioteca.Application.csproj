@@ -10,4 +10,8 @@
     <Folder Include="Dtos\EstadoPrestamo\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Infrestructure\Biblioteca.Infrestructure.csproj" />
+  </ItemGroup>
+
 </Project>

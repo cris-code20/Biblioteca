@@ -6,10 +6,10 @@ namespace Biblioteca.Application.Dtos.Prestamo
 {
     public abstract class PrestamoDto : DtoBase
     {
-        public string? Name { get; set; }
-        public decimal? Budget { get; set; }
-        public DateTime? StartDate { get; set; }
-        public int? IdPrestamo { get; set; }
+        public string? Codigo { get; set; }
+        public int IdEstadoPrestamo { get; set; }
+        public DateTime FechaDevolucion { get; set; }
+        public int IdPrestamo { get; set; }
 
 
     }
