@@ -4,9 +4,10 @@ using Biblioteca.Application.Contract;
 using Biblioteca.Application.Core;
 using Biblioteca.Application.Dtos.Department;
 using Biblioteca.Domain.Entities;
-using Biblioteca.Infrastructure.Exceptions;
-using Biblioteca.Infrastructure.Interfaces;
+using Biblioteca.Infrestructure.Exceptions;
+using Biblioteca.Infrestructure.Interface;
 using System;
+using Biblioteca.Infrestructure.Entities;
 
 namespace Biblioteca.Application.Service
 {
@@ -75,12 +76,12 @@ namespace Biblioteca.Application.Service
 
         public ServiceResult Remove(LectorRemoveDto model)
         {
-            ServiceResult result = new ServiceResult()
+            ServiceResult result = new ServiceResult();
             try
             {
-                this.LectorRepository.Remove(new Lector)
+                this.LectorRepository.Remove(new Lector);
                 {
-                    LectorId = model.LectorId,
+                    LectorID = model.LectorID,
                     Deleted = model.Deleted, 
                     DeletedDate = model.ChangeDate, 
                     UserDeleted = model.ChangeUser
