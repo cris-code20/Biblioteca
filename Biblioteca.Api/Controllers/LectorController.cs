@@ -1,51 +1,69 @@
-﻿using Biblioteca.Infrestructure.Interface;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Biblioteca.Application.Contract;
+using Biblioteca.Application.Dtos.Lector;
+using Biblioteca.Domain.Entities;
+using Biblioteca.Infrestructure.Exceptions;
+using Biblioteca.Infrestructure.Interface;
+using Biblioteca.Infrestructure.Module;
+using Biblioteca.Infrestructure.Entities;
 
 namespace Biblioteca.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class LectorController : ControllerBase
     {
-        private readonly ILector LectorRepository;
+        private readonly ILectorService lectorService;
 
-        public LectorController(ILector LectorRepository)
+        public LectorController(ILectorService lectorService)
         {
-            this.LectorRepository = LectorRepository;
+            this.lectorService = this.lectorService;
         }
-
-        // GET: api/<LectorController>
-        [HttpGet]
+        [HttpGet("GetLector")]
         public IActionResult Get()
         {
-            var LectorRepository = this.LectorRepository.GetEntities();
-            return Ok(LectorRepository);
+            var result = this.lectorService.Get();
+
+            if (!result.Success)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
-        // GET api/<LectorController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+
+        [HttpGet("GetLector")]
+        public IActionResult Get([FromQuery] int id)
         {
-            return "value";
+            var result = this.lectorService.GetById(id);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+
         }
 
-        // POST api/<LectorController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Save")]
+        public IActionResult Post([FromBody] LectorAddDto lectorAddDto)
         {
+            var result = this.lectorService.Save(lectorAddDto);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+
+            return Ok(result);
         }
 
-        // PUT api/<LectorController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("Update")]
+        public IActionResult Put([FromBody] Lector lector)
         {
+            //this.LectorRepository.Update(lector);
+            return Ok();
         }
 
-        // DELETE api/<LectorController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
     }
 }
