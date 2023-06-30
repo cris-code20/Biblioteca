@@ -2,8 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Biblioteca.Application.Contract;
 using Biblioteca.Application.Core;
-using Biblioteca.Application.Dtos.Department;
-using Biblioteca.Domain.Entities;
+using Biblioteca.Application.Dtos.Lector;
 using Biblioteca.Infrestructure.Exceptions;
 using Biblioteca.Infrestructure.Interface;
 using System;
@@ -12,12 +11,12 @@ using Biblioteca.Infrestructure.Entities;
 namespace Biblioteca.Application.Service
 {
 
-    public class LectorService : ILectorService 
+    public class LectorService : ILectorService
     {
-        private readonly ILectorRepository LectorRepository; 
+        private readonly ILector LectorRepository; 
         private readonly ILogger<LectorService> logger; 
 
-        public LectorService(ILectorRepository LectorRepository, 
+        public LectorService(ILector LectorRepository, 
                                   ILogger<LectorService> logger)
         {
             this.LectorRepository = LectorRepository;
@@ -118,14 +117,14 @@ namespace Biblioteca.Application.Service
                 return result;
             }
 
-            if (model.codigo.Length > 20)
+            if (model.Codigo.Length > 20)
             {
                 result.Message = "El codigo tiene una longitud invalida";
                 result.Success = false;
                 return result;
             }
 
-            if (string.IsNullOrEmpty(model.Apellido)
+            if (string.IsNullOrEmpty(model.Apellido))
             {
                 result.Message = "El apellido del lector es requerido.";
                 result.Success = false;
@@ -168,15 +167,6 @@ namespace Biblioteca.Application.Service
                 return result;
             }
 
-            if (!model.FechaCreacion.HasValue)
-            {
-                result.Message = "La fecha de creacion es requerida";
-                result.Success = false;
-                return result;
-            }
-
-
-
             try
             {
                 this.LectorRepository.Add(new Lector()
@@ -187,12 +177,12 @@ namespace Biblioteca.Application.Service
                     Correo = model.Correo,
                     Clave = model.Clave,
                     Estado = model.Estado,
-                    FechaCreacion = model.FechaCreacion.ChangeDate
+                    FechaCreacion = model.FechaCreacion
                 }); ;
 
                 result.Message = "Lector agregado correctamente.";
             }
-            catch (DepartmentException dex)
+            catch (LectorException dex)
             {
                 result.Success = false;
                 result.Message = dex.Message;
