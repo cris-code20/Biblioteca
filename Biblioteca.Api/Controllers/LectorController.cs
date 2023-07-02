@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Application.Contract;
 using Biblioteca.Application.Dtos.Lector;
-using Biblioteca.Domain.Entities;
 using Biblioteca.Infrestructure.Exceptions;
 using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Module;

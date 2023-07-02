@@ -5,8 +5,8 @@ using Biblioteca.Application.Core;
 using Biblioteca.Application.Dtos.Lector;
 using Biblioteca.Infrestructure.Exceptions;
 using Biblioteca.Infrestructure.Interface;
-using System;
 using Biblioteca.Infrestructure.Entities;
+using Biblioteca.Application.Dtos.Department;
 
 namespace Biblioteca.Application.Service
 {
@@ -54,7 +54,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.LectorRepository.GetLectorById(id); 
+                result.Data = this.LectorRepository.GetById(id); 
             }
             catch (LectorException dex)
             {
@@ -81,17 +81,17 @@ namespace Biblioteca.Application.Service
                 this.LectorRepository.Remove(new Lector);
                 {
                     LectorID = model.LectorID,
-                    Deleted = model.Deleted, 
-                    DeletedDate = model.ChangeDate, 
+                    Deleted = model.Deleted,
+                    DeletedDate = model.ChangeDate,
                     UserDeleted = model.ChangeUser
-                });
-                result.Message = "Departamento eliminado correctamente.";
+                };
+                result.Message = "Lector eliminado correctamente.";
             }
             catch (Exception ex)
             {
 
                 result.Success = false;
-                result.Message = "Error guardando el departamento.";
+                result.Message = "Error guardando el lector.";
                 this.logger.LogError($"{result.Message}", ex.ToString());
             }
 
@@ -206,7 +206,7 @@ namespace Biblioteca.Application.Service
 
 
 
-            this.LectorRepository.Update(new Lector()
+            this.LectorRepository.update(new Lector()
             {
                 Codigo = model.Codigo,
                 Nombre = model.Nombre,
@@ -214,7 +214,7 @@ namespace Biblioteca.Application.Service
                 Correo = model.Correo,
                 Clave = model.Clave,
                 Estado = model.Estado,
-                FechaCreacion = model.FechaCreacion.ChangeDate
+                FechaCreacion = model.FechaCreacion
             });
 
 
