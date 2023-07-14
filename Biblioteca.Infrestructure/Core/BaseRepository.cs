@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 
+
 namespace Biblioteca.Infrestructure.Core
 {
     public abstract class BaseRepository<TEntity> : IRepositoryBaseLector<TEntity> where TEntity : class
