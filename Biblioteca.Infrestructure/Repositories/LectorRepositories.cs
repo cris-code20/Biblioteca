@@ -10,13 +10,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Biblioteca.Infrestructure.Repositories
 {
-    public class PresatamoRepositories : BaseRepository<Lector>, ILector
+    public class LectorRepositories : BaseRepository<Lector>, ILector
     {
 
-        readonly ILogger<PresatamoRepositories> logger;
+        readonly ILogger<LectorRepositories> logger;
         readonly Bibliotecacontext context;
 
-        public PresatamoRepositories(ILogger<PresatamoRepositories> logger, Bibliotecacontext context) : base(context)
+        public LectorRepositories(ILogger<LectorRepositories> logger, Bibliotecacontext context) : base(context)
         {
             this.logger = logger;
             this.context = context;

@@ -8,6 +8,7 @@ using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Entities;
 using Biblioteca.Application.Dtos.Department;
 
+
 namespace Biblioteca.Application.Service
 {
 
@@ -54,7 +55,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.LectorRepository.GetById(id); 
+                result.Data = this.LectorRepository.GetLectorById(id); 
             }
             catch (LectorException dex)
             {
