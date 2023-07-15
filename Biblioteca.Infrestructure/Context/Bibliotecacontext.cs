@@ -1,4 +1,4 @@
-﻿using Biblioteca.Domain.Entities;
+﻿using Biblioteca.Infrestructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteca.Infrestructure.Context

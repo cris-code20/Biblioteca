@@ -10,6 +10,6 @@ namespace Biblioteca.Domain.Repository
     TEntity GetEntity(int entityid);
     bool Exists(Expression<Func<TEntity, bool>> filter);
     IEnumerable<TEntity> GetEntities();
-    List<Infrestructure.Module.LectorModel> GetLector(int IdLector);
+
 }
 }
