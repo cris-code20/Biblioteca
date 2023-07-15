@@ -69,5 +69,15 @@ namespace Biblioteca.Infrestructure.Core
         {
             return this.myDbset.Any(filter);
         }
+
+        public void Delete(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<TEntity> IRepositoryBaseLector<TEntity>.GetEntities()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

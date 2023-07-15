@@ -1,4 +1,4 @@
-﻿namespace Biblioteca.Application.Core
+﻿namespace Biblioteca.Application.Core;
 
 public class ServiceResult
 {

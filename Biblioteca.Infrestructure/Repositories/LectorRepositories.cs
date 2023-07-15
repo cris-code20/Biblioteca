@@ -117,6 +117,19 @@ namespace Biblioteca.Infrestructure.Repositories
             return lectors;
         }
 
+        public dynamic GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        List<Lector> ILector.GetLector(int Lector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public dynamic GetLector()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
