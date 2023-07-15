@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Security.Cryptography.X509Certificates;
-
+﻿
 namespace Biblioteca.Infrestructure.Entities
 {
     public class Lector
