@@ -55,7 +55,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.LectorRepository.GetLectorById(id); 
+                result.Data = this.LectorRepository.GetById(id); 
             }
             catch (LectorException dex)
             {

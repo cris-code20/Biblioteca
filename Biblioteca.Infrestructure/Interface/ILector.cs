@@ -6,6 +6,8 @@ namespace Biblioteca.Infrestructure.Interface
 {
     public interface ILector : IRepositoryBaseLector<Lector>
     {
+        dynamic GetById(int id);
         List<Lector> GetLector(int Lector);
+        dynamic GetLector();
     }
 }
