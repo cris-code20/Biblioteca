@@ -79,13 +79,13 @@ namespace Biblioteca.Application.Service
             ServiceResult result = new ServiceResult();
             try
             {
-                this.LectorRepository.Remove(new Lector);
+                this.LectorRepository.Remove(new Lector()
                 {
-                    LectorID = model.LectorID,
-                    Deleted = model.Deleted,
-                    DeletedDate = model.ChangeDate,
+                    LectorID = model.LectorID
+                    Deleted = model.Deleted
+                    DeletedDate = model.ChangeDate
                     UserDeleted = model.ChangeUser
-                };
+                });
                 result.Message = "Lector eliminado correctamente.";
             }
             catch (Exception ex)
