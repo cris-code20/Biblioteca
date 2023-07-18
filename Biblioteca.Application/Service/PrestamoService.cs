@@ -83,7 +83,7 @@ namespace Biblioteca.Application.Service
                     IdEstadoPrestamo = model.IdEstadoPrestamo,
                     Deleted = model.Delete,
                     FechaDevolucion = model.ChangeDate
-                    
+
                 });
 
                 result.Message = "Departamento eliminado Correctamente";
@@ -143,7 +143,7 @@ namespace Biblioteca.Application.Service
             return result;
         }
 
-        public ServiceResult Update(PrestamoAddDto model)
+        public ServiceResult Update(PrestamoUpdateDto model)
         {
             ServiceResult result = new ServiceResult();
 
@@ -186,6 +186,6 @@ namespace Biblioteca.Application.Service
             return result;
         }
 
-
+        
     }
 }

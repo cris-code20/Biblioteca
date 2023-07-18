@@ -19,14 +19,14 @@ namespace Biblioteca.Application.Extentios
             };
         }
 
-        public static Prestamo ConvertDtoUpdateToEntity(this PrestamoAddDto prestamoAddDto)
+        public static Prestamo ConvertDtoUpdateToEntity(this PrestamoUpdateDto prestamoUpdateDto)
         {
             return new Prestamo()
             {
-                Codigo = prestamoAddDto.Codigo,
-                IdEstadoPrestamo = prestamoAddDto.IdPrestamo,
-                FechaDevolucion = prestamoAddDto.FechaDevolucion,
-                IdPrestamo = prestamoAddDto.IdPrestamo
+                Codigo = prestamoUpdateDto.Codigo,
+                IdEstadoPrestamo = prestamoUpdateDto.IdPrestamo,
+                FechaDevolucion = prestamoUpdateDto.FechaDevolucion,
+                IdPrestamo = prestamoUpdateDto.IdPrestamo
             };
         }
     }

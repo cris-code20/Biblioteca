@@ -94,7 +94,7 @@ namespace Biblioteca.Infrestructure.Repositories
             return prestamoModelss;
         }
 
-        public List<prestamoModels> GetPrestamos(int IdPrestamo)
+        public List<prestamoModels> GetPrestamos()
         {
             List<prestamoModels> prestamos = new();
 

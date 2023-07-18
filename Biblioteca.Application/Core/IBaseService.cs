@@ -5,8 +5,8 @@ namespace Biblioteca.Application.Core
     {
         ServiceResult Get();
         ServiceResult GetById(int id);
-        ServiceResult Save(TModelMod model);
-        ServiceResult Update(TModelMod model);
-        ServiceResult Remove(TModelMod model);
+        ServiceResult Save(TDtoAdd model);
+        public abstract ServiceResult Update(TDtoMod model);
+        ServiceResult Remove(TDtoRem model);
     }
 }

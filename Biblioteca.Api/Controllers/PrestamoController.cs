@@ -2,6 +2,8 @@
 using Biblioteca.Application.Contract;
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Application.Dtos.Prestamo;
+using Biblioteca.Application.Service;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,9 +13,9 @@ namespace Biblioteca.Api.Controllers
     [ApiController]
     public class PrestamoController : ControllerBase
     {
-        private readonly IPrestamoService prestamoService;
+        private readonly PrestamoService prestamoService;
 
-        public PrestamoController(IPrestamoService prestamoService) 
+        public PrestamoController(PrestamoService prestamoService) 
         {
             this.prestamoService = prestamoService;
         }
@@ -46,7 +48,7 @@ namespace Biblioteca.Api.Controllers
         [HttpPost("Update")]
         public IActionResult Put([FromBody] PrestamoUpdateDto prestamoUpdate )
         {
-            var result = this.prestamoService.Uppdate(prestamoUpdate);
+            var result = this.prestamoService.Update(prestamoUpdate);
             return Ok(result);
 
         }
@@ -60,3 +62,4 @@ namespace Biblioteca.Api.Controllers
         }
     }
 }
+    
