@@ -79,12 +79,13 @@ namespace Biblioteca.Application.Service
             ServiceResult result = new ServiceResult();
             try
             {
-                this.LectorRepository.Remove(new Lector()
+                // tienes que agregar datos de tus datos
+                this.LectorRepository.Delete(new Lector()
                 {
-                    LectorID = model.LectorID
-                    Deleted = model.Deleted
-                    DeletedDate = model.ChangeDate
-                    UserDeleted = model.ChangeUser
+                    IdLector = model.LectorID,
+                    Deleted = model.Deleted,
+                    DeletedDate = model.ChangeDate,
+                    UserDeleted = model.ChangeUser,
                 });
                 result.Message = "Lector eliminado correctamente.";
             }
