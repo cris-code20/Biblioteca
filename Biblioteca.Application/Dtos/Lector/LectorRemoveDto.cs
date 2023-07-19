@@ -6,6 +6,7 @@ namespace Biblioteca.Application.Dtos.Department
     {
         public int LectorID { get; set; }
         public bool Deleted { get; set; }
+        
 
     }
 }

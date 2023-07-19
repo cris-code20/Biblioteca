@@ -84,7 +84,7 @@ namespace Biblioteca.Application.Service
                 {
                     IdLector = model.LectorID,
                     Deleted = model.Deleted,
-                    DeletedDate = model.ChangeDate,
+                    DeleteDate = model.ChangeDate,
                     UserDeleted = model.ChangeUser,
                 });
                 result.Message = "Lector eliminado correctamente.";

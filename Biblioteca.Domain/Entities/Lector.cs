@@ -10,6 +10,9 @@ namespace Biblioteca.Infrestructure.Entities
         public string? Correo { get; set; } 
         public string? Clave { get; set; }  
         public int Estado { get; set; }
-        public DateTime FechaCreacion {  get; set; }    
+        public DateTime FechaCreacion {  get; set; }
+        public DateTime DeleteDate { get; set; }
+        public int UserDeleted { get; set; }
+        public bool Deleted { get; set; }
     }
 }
