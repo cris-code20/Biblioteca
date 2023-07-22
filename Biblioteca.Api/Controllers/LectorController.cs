@@ -17,7 +17,7 @@ namespace Biblioteca.Api.Controllers
         {
             this.lectorService = this.lectorService;
         }
-        [HttpGet("GetLector")]
+        [HttpGet]
         public IActionResult Get()
         {
             var result = this.lectorService.Get();
@@ -30,8 +30,8 @@ namespace Biblioteca.Api.Controllers
         }
 
 
-        [HttpGet("GetLector")]
-        public IActionResult Get([FromQuery] int id)
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
         {
             var result = this.lectorService.GetById(id);
 
