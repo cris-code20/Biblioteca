@@ -1,9 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Biblioteca.Infrestructure.Entities
 {
     public class Lector
     {
-        public int IdLector { get; set; }
+        [Key] public int IdLector { get; set; }
         public string? Codigo { get; set; }    
         public string? Nombre { get; set; }    
         public string? Apellido { get; set; }
