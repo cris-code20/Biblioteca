@@ -1,8 +1,7 @@
-﻿
+﻿using Biblioteca.Application.Contract;
 using Microsoft.AspNetCore.Mvc;
-using Biblioteca.Application.Contract;
 using Biblioteca.Application.Dtos.Lector;
-using Biblioteca.Infrestructure.Entities;
+using Biblioteca.Application.Service;
 using Biblioteca.Application.Dtos.Department;
 
 namespace Biblioteca.Api.Controllers
@@ -21,11 +20,6 @@ namespace Biblioteca.Api.Controllers
         public IActionResult Get()
         {
             var result = this.lectorService.Get();
-
-            if (!result.Success)
-                return BadRequest(result);
-
-
             return Ok(result);
         }
 
@@ -34,10 +28,6 @@ namespace Biblioteca.Api.Controllers
         public IActionResult Get(int id)
         {
             var result = this.lectorService.GetById(id);
-
-            if (!result.Success)
-                return BadRequest(result);
-
             return Ok(result);
 
         }
@@ -46,11 +36,6 @@ namespace Biblioteca.Api.Controllers
         public IActionResult Post([FromBody] LectorAddDto lectorAddDto)
         {
             var result = this.lectorService.Save(lectorAddDto);
-
-            if (!result.Success)
-                return BadRequest(result);
-
-
             return Ok(result);
         }
 
