@@ -12,43 +12,40 @@ namespace Biblioteca.Api.Controllers
     {
         private readonly ILectorService lectorService;
 
-        public LectorController(ILectorService lectorService)
-        {
-            this.lectorService = this.lectorService;
-        }
+        public LectorController(ILectorService lectorService) => this.lectorService = this.lectorService;
         [HttpGet]
         public IActionResult Get()
         {
-            var result = this.lectorService.Get();
-            return Ok(result);
+            var lector = this.lectorService.Get();
+            return Ok(lector);
         }
 
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var result = this.lectorService.GetById(id);
-            return Ok(result);
+            var lector = this.lectorService.GetById(id);
+            return Ok(lector);
 
         }
 
         [HttpPost("Save")]
         public IActionResult Post([FromBody] LectorAddDto lectorAddDto)
         {
-            var result = this.lectorService.Save(lectorAddDto);
-            return Ok(result);
+            var lector = this.lectorService.Save(lectorAddDto);
+            return Ok(lector);
         }
 
         [HttpPost("Update")]
         public IActionResult Put([FromBody] LectorUpdateDto lectorUpdateDto)
         {
-            var result = this.lectorService.Update(lectorUpdateDto);
+            var lector = this.lectorService.Update(lectorUpdateDto);
             return Ok();
         }
         [HttpPost("Remove")]
         public IActionResult Remove([FromBody] LectorRemoveDto lectorRemoveDto)
         {
-            var result = this.lectorService.Remove(lectorRemoveDto);
+            var lector = this.lectorService.Remove(lectorRemoveDto);
             return Ok();
         }
 
