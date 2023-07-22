@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Application.Contract;
 using Biblioteca.Application.Dtos.Lector;
-using Biblioteca.Infrestructure.Exceptions;
-using Biblioteca.Infrestructure.Interface;
-using Biblioteca.Infrestructure.Module;
 using Biblioteca.Infrestructure.Entities;
+using Biblioteca.Application.Dtos.Department;
 
 namespace Biblioteca.Api.Controllers
 {
@@ -57,9 +55,15 @@ namespace Biblioteca.Api.Controllers
         }
 
         [HttpPost("Update")]
-        public IActionResult Put([FromBody] Lector lector)
+        public IActionResult Put([FromBody] LectorUpdateDto lectorUpdateDto)
         {
-            //this.LectorRepository.Update(lector);
+            var result = this.lectorService.Update(lectorUpdateDto);
+            return Ok();
+        }
+        [HttpPost("Remove")]
+        public IActionResult Remove([FromBody] LectorRemoveDto lectorRemoveDto)
+        {
+            var result = this.lectorService.Remove(lectorRemoveDto);
             return Ok();
         }
 
