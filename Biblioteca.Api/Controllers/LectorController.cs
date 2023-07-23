@@ -12,11 +12,16 @@ namespace Biblioteca.Api.Controllers
     {
         private readonly ILectorService lectorService;
 
-        public LectorController(ILectorService lectorService) => this.lectorService = this.lectorService;
+        public LectorController(ILectorService lectorService)
+        {
+            this.lectorService = lectorService;
+        }
         [HttpGet]
         public IActionResult Get()
         {
             var lector = this.lectorService.Get();
+            if (!lector.Success)
+                return BadRequest(lector);
             return Ok(lector);
         }
 
