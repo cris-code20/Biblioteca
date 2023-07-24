@@ -129,7 +129,29 @@ namespace Biblioteca.Infrestructure.Repositories
 
         public dynamic GetLector()
         {
-            throw new NotImplementedException();
+            public List<LectorModel> GetLector()
+            {
+                List<LectorModel> lectors = new List<LectorModel>();
+
+                try
+                {
+                    lectors = this.context.Lector
+                        .Select(pre => new LectorModel()
+                        {
+                            IdLector = pre.IdLector,
+                            Nombre = pre.Nombre,
+                            Apellido = pre.Apellido,
+                            Correo = pre.Correo
+                        }).ToList();
+                }
+                catch (Exception ex)
+                {
+                    this.logger.LogError("Error no puedes obtener los lectores", ex.ToString());
+                }
+
+                return lectors;
+            }
+
         }
     }
 }
