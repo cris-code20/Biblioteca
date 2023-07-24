@@ -32,10 +32,10 @@ namespace Biblioteca.Application.Service
             {
                 result.Data = this.LectorRepository.GetLector();
             }
-            catch (LectorException dex)
+            catch (LectorException ex)
             {
                 result.Success = false;
-                result.Message = dex.Message;
+                result.Message = ex.Message;
                 this.logger.LogError($"{result.Message}");
 
             }
