@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Biblioteca.Infrestructure.Repositories
 {
-    public class LectorRepositories : BaseRepository<Lector>, ILector
+    public class LectorRepositories : BaseRepository<Lector>
     {
 
         readonly ILogger<LectorRepositories> logger;
@@ -49,7 +49,7 @@ namespace Biblioteca.Infrestructure.Repositories
                 lectorToUpdate.Clave = entity.Clave;
                 lectorToUpdate.Estado = entity.Estado;
 
-                this.context.Lector.Update(lectorToUpdate);
+                this.context.Lectores.Update(lectorToUpdate);
                 this.context.SaveChanges();
             }
             catch (Exception ex)
@@ -99,7 +99,7 @@ namespace Biblioteca.Infrestructure.Repositories
 
             try
             {
-                lectors = this.context.Lector
+                lectors = this.context.Lectores
                     .Select(pre => new LectorModel()
                     {
                         IdLector = pre.IdLector,
@@ -116,42 +116,28 @@ namespace Biblioteca.Infrestructure.Repositories
 
             return lectors;
         }
-
-        public dynamic GetById(int id)
+        public List<LectorModel> GetLector()
         {
-            throw new NotImplementedException();
-        }
+            List<LectorModel> lectors = new List<LectorModel>();
 
-        List<Lector> ILector.GetLector(int Lector)
-        {
-            throw new NotImplementedException();
-        }
-
-        public dynamic GetLector()
-        {
-            public List<LectorModel> GetLector()
+            try
             {
-                List<LectorModel> lectors = new List<LectorModel>();
-
-                try
-                {
-                    lectors = this.context.Lector
-                        .Select(pre => new LectorModel()
-                        {
-                            IdLector = pre.IdLector,
-                            Nombre = pre.Nombre,
-                            Apellido = pre.Apellido,
-                            Correo = pre.Correo
-                        }).ToList();
-                }
-                catch (Exception ex)
-                {
-                    this.logger.LogError("Error no puedes obtener los lectores", ex.ToString());
-                }
-
-                return lectors;
+                lectors = this.context.Lectores
+                    .Select(pre => new LectorModel()
+                    {
+                        IdLector = pre.IdLector,
+                        Nombre = pre.Nombre,
+                        Apellido = pre.Apellido,
+                        Correo = pre.Correo
+                    }).ToList();
+            }
+            catch (Exception ex)
+            {
+                this.logger.LogError("Error no puedes obtener los lectores", ex.ToString());
             }
 
+            return lectors;
         }
+
     }
 }
