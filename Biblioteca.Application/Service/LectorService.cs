@@ -30,7 +30,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.LectorRepository.GetLector();
+                result.Data =  this.LectorRepository.GetLector();
             }
             catch (LectorException ex)
             {
