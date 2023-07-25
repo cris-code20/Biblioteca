@@ -62,13 +62,13 @@ namespace Biblioteca.Infrestructure.Repositories
         {
             try
             {
-                Lector prestamoToRemove = this.GetEntity(entity.IdLector);
+                Lector lectorToRemove = this.GetEntity(entity.IdLector);
 
 
             }
             catch (Exception ex)
             {
-                this.logger.LogError("Error no puedes Eliminar el prestamo", ex.ToString());
+                this.logger.LogError("Error no puedes Eliminar el lector", ex.ToString());
 
             }
         }
@@ -95,11 +95,11 @@ namespace Biblioteca.Infrestructure.Repositories
 
         public List<LectorModel> GetLector(int IdLector)
         {
-            List<LectorModel> lectors = new();
+            List<LectorModel> lector = new();
 
             try
             {
-                lectors = this.context.Lectores
+                lector = this.context.Lectores
                     .Select(pre => new LectorModel()
                     {
                         IdLector = pre.IdLector,
@@ -114,13 +114,17 @@ namespace Biblioteca.Infrestructure.Repositories
 
             }
 
-            return lectors;
+            return lector;
         }
         public List<LectorModel> GetLector()
         {
             List<LectorModel> lectors = new List<LectorModel>();
 
             try
+
+
+
+
             {
                 lectors = this.context.Lectores
                     .Select(pre => new LectorModel()
