@@ -7,4 +7,13 @@
     <RootNamespace>Biblioteca_web</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Biblioteca.Application\Biblioteca.Application.csproj" />
+    <ProjectReference Include="..\Biblioteca.IOC\Biblioteca.IOC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Lector\" />
+  </ItemGroup>
+
 </Project>
