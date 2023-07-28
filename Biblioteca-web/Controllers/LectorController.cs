@@ -4,117 +4,134 @@ using Biblioteca.Application.Contract;
 using Biblioteca.Application.Dtos.Lector;
 using Biblioteca_web.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Biblioteca_web.Controllers
 {
     public class LectorController : Controller
     {
-      private readonly ILectorService lectorService;
-      public LectorController (ILectorService lectorService)
+
+        HttpClientHandler httpClientHandler = new HttpClientHandler();
+        public LectorController(IConfiguration configuration)
         {
-            this.lectorService = lectorService; 
-        }
-      public ActionResult Index() 
-        {
-            var result = this.lectorService.Get();
-            if (!result.Success)
-            {
-                ViewBag.Message = result.Message;
-                return View();
-            }
-            var lectores = ((List<Biblioteca.Infrestructure.Module.LectorModel>)result.Data)
-                                                           .Select(cd => new Models.LectorModel()
-                                                               {
-                                                               IdLector = cd.IdLector,
-                                                               Nombre = cd.Nombre,
-                                                               Apellido = cd.Apellido,
-                                                               Correo = cd.Correo,
-                                                           }).ToList();
-            return View(lectores);
+            this.httpClientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyError) => { return true; };
 
         }
+        public ActionResult Index()
+        {
+            LectorListResponse lectorReponse = new LectorListReponse();
+
+            using (var httpClient = new HttpClient(this.httpClientHandler))
+            {
+
+                using (var response = httpClient.GetAsync("http://localhost:5292/api/Lector").Result)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        lectorReponse = JsonConvert.DeserializeObject<LectorListResponse>(apiResponse);
+                    }
+
+
+                }
+            }
+            return View(LectorListResponse.data);
+        }
+
         public ActionResult Details(int id)
         {
-            var result = this.lectorService.GetById(id);
+            LectorDetailResponse courseDetailResponse = new LectorDetailResponse();
 
-            if (!result.Success)
+            using (var httpClient = new HttpClient(this.httpClientHandler))
             {
-                ViewBag.Message = result.Message;
-                return View();
+
+                using (var response = httpClient.GetAsync("http://localhost:5037/api/Course/GetCourse?id=" + id).Result)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        courseDetailResponse = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
+                    }
+
+
+                }
             }
-
-            var lecto = (Biblioteca.Infrestructure.Module.LectorModel)result.Data;
-
-            var lecModel =  new Models.LectorModel()
-            {
-                IdLector = lecto.IdLector,
-                Nombre = lecto.Nombre,  
-                Apellido = lecto.Apellido,
-                Correo = lecto.Correo,  
-            };
-
-            return View(lecModel);
-
+            return View(courseDetailResponse.data);
         }
+
+        // GET: CourseController/Create
         public ActionResult Create()
         {
             return View();
         }
+
+        // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(LectorAddDto lectorAddDto)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                var result = this.lectorService.Save(lectorAddDto);
-                if (!result.Success)
-                {
-                    ViewBag.Message = result.Message;
-                    return View();
-                }
                 return RedirectToAction(nameof(Index));
-
             }
             catch
             {
                 return View();
             }
         }
+
+        // GET: CourseController/Edit/5
         public ActionResult Edit(int id)
         {
-            var result = this.lectorService.GetById(id);
-            if (!result.Success)
-            {
-                ViewBag.Message = result.Message;
-                return View();
-            }
-            var lecto = (Biblioteca.Infrestructure.Module.LectorModel)result.Data;
+            LectorDetailResponse lectorDetailResponse = new LectorDetailResponse();
 
-            var lecModel = new Models.LectorModel()
+            using (var httpClient = new HttpClient(this.httpClientHandler))
             {
-                IdLector = lecto.IdLector,
-                Nombre = lecto.Nombre,
-                Apellido = lecto.Apellido,
-                Correo = lecto.Correo,
-            };
-            return View(lecto);
+
+                using (var response = httpClient.GetAsync("http://localhost:5292/api/Lector" + id).Result)
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+                        lectorDetailResponse = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
+                    }
+
+
+                }
+            }
+            return View(lectorDetailResponse.data);
         }
-        [HttpGet]
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(LectorUpdateDto lectoUpdateDto)
+        public ActionResult Edit(LectorUpdateDto lectorUpdateDto)
         {
             try
             {
-                var result = this.lectorService.Update(lectoUpdateDto);
-                if (!result.Success)
+
+                var LectorAddResponse = new lectorAddResponse();
+
+
+
+                using (var httpClient = new HttpClient(this.httpClientHandler))
                 {
-                    ViewBag.Message = result.Message;
-                    return View();
+
+
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(lectorAddResponse), Encoding.UTF8, "application/json");
+
+                    using (var response = httpClient.PostAsync("http://localhost:5037/api/Course/Update", content).Result)
+                    {
+                        string apiResponse = response.Content.ReadAsStringAsync().Result;
+
+                        var result = JsonConvert.DeserializeObject<LectorAddResponse>(apiResponse);
+                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
             catch
-            { 
+            {
                 return View();
             }
         }
