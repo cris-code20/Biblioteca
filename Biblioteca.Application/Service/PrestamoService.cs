@@ -27,7 +27,9 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.prestamoRepositorie.GetPrestamos();
+                var dato = this.prestamoRepositorie.GetPrestamos();
+                result.Data = dato;
+                result.Message = "DATOS RECIVIDOS";
             }
             catch (PrestamoException dex)
             {
@@ -51,7 +53,8 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.prestamoRepositorie.GetPrestamoById(id);
+                var dato = this.prestamoRepositorie.GetPrestamoById(id);
+                result.Data = dato; 
             }
             catch (PrestamoException dex)
             {

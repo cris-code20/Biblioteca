@@ -15,20 +15,15 @@ namespace Biblioteca.Infrestructure.Core
 
         public BaseRepository(BibliotecaContext context)
     {
-        this.context = context;
-            var entities = this.context.Set<TEntity>();
-            myDbset = entities;
+            this.context = context;
+            this.myDbset = this.context.Set<TEntity>();
+
+            
     }
 
-       
-        public virtual void Add(TEntity entity)
+        public virtual bool Exists(Expression<Func<TEntity, bool>> filter)
         {
-            this.myDbset.Add(entity);
-        }
-
-        public virtual void Add(TEntity[] entities)
-        {
-            this.myDbset.AddRange(entities);
+            return this.myDbset.Any(filter);
         }
 
         public virtual List<TEntity> GetEntities()
@@ -38,7 +33,17 @@ namespace Biblioteca.Infrestructure.Core
 
         public virtual TEntity GetEntity(int id)
         {
-            return myDbset.Find(id);
+            return this.myDbset.Find(id);
+        }
+
+        public virtual void Add(TEntity entity)
+        {
+            this.myDbset.Add(entity);
+        }
+
+        public virtual void Add(TEntity[] entities)
+        {
+            this.myDbset.AddRange(entities);
         }
 
        public virtual void remove(TEntity entity)
@@ -66,9 +71,6 @@ namespace Biblioteca.Infrestructure.Core
             this.myDbset.UpdateRange(entities);
         }
 
-        public virtual bool Exists(Expression<Func<TEntity, bool>> filter)
-        {
-            return this.myDbset.Any(filter);
-        }
+     
     }
 }

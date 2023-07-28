@@ -14,7 +14,9 @@ namespace Biblioteca.Application.Extentios
                 Codigo = prestamoAddDto.Codigo,
                 IdEstadoPrestamo = prestamoAddDto.IdPrestamo,
                 FechaDevolucion = prestamoAddDto.FechaDevolucion,
-                IdPrestamo = prestamoAddDto.IdPrestamo
+                IdPrestamo = prestamoAddDto.IdPrestamo,
+                CreationUser = prestamoAddDto.ChangeUser,
+                CreationDate = prestamoAddDto.ChangeDate,
 
             };
         }

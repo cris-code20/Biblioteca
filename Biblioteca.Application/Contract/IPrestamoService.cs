@@ -3,13 +3,10 @@ using Biblioteca.Application.Dtos.Prestamo;
 
 namespace Biblioteca.Application.Contract
 {
-    public interface IPrestamoService
+    public interface IPrestamoService : IBaseService<PrestamoAddDto, PrestamoUpdateDto, PrestamoRemoveDto>
     {
 
-        public interface IPretamoService : IBaseService<PrestamoAddDto, PrestamoUpdateDto, PrestamoRemoveDto>
-        {
 
-
-        }
     }
+   
 }

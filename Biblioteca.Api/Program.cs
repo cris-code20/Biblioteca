@@ -1,3 +1,5 @@
+using Biblioteca.Application.Contract;
+using Biblioteca.Application.Service;
 using Biblioteca.Infrestructure.Context;
 using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Repositories;
@@ -18,8 +20,10 @@ builder.Services.AddDbContext<BibliotecaContext>(options => options.UseSqlServer
 
 
 
-builder.Services.AddTransient<IestadoPrestamo, EstadoprestamoRepositories>();
+//builder.Services.AddTransient<IestadoPrestamo, EstadoprestamoRepositories>();
 builder.Services.AddTransient<IprestamosRepository, PresatamoRepositories>();
+builder.Services.AddTransient<IPrestamoService, PrestamoService>();
+
 
 
 var app = builder.Build();

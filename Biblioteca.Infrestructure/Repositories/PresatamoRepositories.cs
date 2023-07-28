@@ -5,6 +5,7 @@ using Biblioteca.Infrestructure.Exceptiones;
 using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Module;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 
 namespace Biblioteca.Infrestructure.Repositories
@@ -12,8 +13,8 @@ namespace Biblioteca.Infrestructure.Repositories
     public class PresatamoRepositories : BaseRepository<Prestamo>, IprestamosRepository
     {
 
-        readonly ILogger<PresatamoRepositories> logger;
-        readonly BibliotecaContext context;
+        private readonly ILogger<PresatamoRepositories> logger;
+        private readonly BibliotecaContext context;
 
         public PresatamoRepositories(ILogger<PresatamoRepositories> logger, BibliotecaContext context) : base(context)
         {
@@ -40,12 +41,11 @@ namespace Biblioteca.Infrestructure.Repositories
                 Prestamo prestamoToUpdate = this.GetEntity(entity.IdPrestamo);
 
                 prestamoToUpdate.IdPrestamo = entity.IdPrestamo;
+                prestamoToUpdate.ModifyDate = entity.ModifyDate;
                 prestamoToUpdate.Codigo = entity.Codigo;
-                prestamoToUpdate.EstadoEntregado = entity.EstadoEntregado;
-                prestamoToUpdate.EstadoRecibido = entity.EstadoRecibido;
-                prestamoToUpdate.FechaCreacion = entity.FechaCreacion;
-                prestamoToUpdate.FechaDevolucion = entity.FechaDevolucion;
-                prestamoToUpdate.FechaConfirmacionDevolucion = entity.FechaConfirmacionDevolucion;
+                prestamoToUpdate.IdEstadoPrestamo  = entity.IdEstadoPrestamo;
+                prestamoToUpdate.Usermod = entity.Usermod;
+                
 
                 this.context.Prestamos.Update(prestamoToUpdate);
                 this.context.SaveChanges();
@@ -61,8 +61,13 @@ namespace Biblioteca.Infrestructure.Repositories
             try
             {
                 Prestamo prestamoToRemove = this.GetEntity(entity.IdPrestamo);
-
                 
+                prestamoToRemove.DeleteDate = entity.DeleteDate;
+                prestamoToRemove.UserDelete = entity.UserDelete;
+                prestamoToRemove.Deleted = entity.Deleted;
+
+
+
             }
             catch (Exception ex) 
             {
@@ -83,11 +88,17 @@ namespace Biblioteca.Infrestructure.Repositories
                 prestamoModelss.IdEstadoPrestamo = prestamo.IdPrestamo;
                 prestamoModelss.Codigo = prestamo.Codigo;
                 prestamoModelss.IdLibro = prestamo.IdLibro;
-               
+                prestamoModelss.IdLector = prestamo.IdLector;
+                prestamoModelss.FechaDevolucion = prestamo.FechaConfirmacionDevolucion;
+                prestamoModelss.FechaConfirmacionDevolucion = prestamo.FechaConfirmacionDevolucion;
+                prestamoModelss.EstadoEntregado = prestamo.EstadoEntregado;
+                prestamoModelss.EstadoRecibido = prestamo.EstadoRecibido;
+
+
             }
             catch(Exception ex) 
             {
-                this.logger.LogError("Error no puedes obtener el prestamo", ex.ToString());
+                this.logger.LogError("Error no puedes obtener el prestamo1", ex.ToString());
 
             }
 
@@ -96,22 +107,28 @@ namespace Biblioteca.Infrestructure.Repositories
 
         public List<prestamoModels> GetPrestamos()
         {
-            List<prestamoModels> prestamos = new();
+            List<prestamoModels> prestamos = new List<prestamoModels>();
 
             try
             {
                 prestamos = this.context.Prestamos
-                    .Select(pre => new prestamoModels()
+                                        .Select(pre => new prestamoModels()
                     {
                         IdPrestamo = pre.IdPrestamo,
+                        Codigo = pre.Codigo,
                         IdEstadoPrestamo = pre.IdEstadoPrestamo,
                         IdLibro = pre.IdLibro,
-                        IdLector = pre.IdLector
+                        IdLector = pre.IdLector,
+                        FechaDevolucion = pre.FechaDevolucion,
+                        FechaConfirmacionDevolucion = pre.FechaConfirmacionDevolucion,
+                        EstadoEntregado = pre.EstadoEntregado,
+                        EstadoRecibido = pre.EstadoRecibido
+
                     }).ToList();
             }
             catch (Exception ex)
             {
-                this.logger.LogError("Error no puedes obtener el prestamo", ex.ToString());
+                this.logger.LogError("Error no puedes obtener el prestamo2", ex.ToString());
 
             }
 

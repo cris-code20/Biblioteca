@@ -1,12 +1,13 @@
 ﻿using Biblioteca.Domain.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace Biblioteca.Domain.Entitis
 {
     public class Prestamo : BaseEntity
     {
-        public bool Deleted;
+        
 
-        public int IdPrestamo { get; set; }
+        [Key] public int IdPrestamo { get; set; }
         public string ? Codigo { get; set; }
         public int IdEstadoPrestamo { get; set; }
         public int IdLector { get; set; }
