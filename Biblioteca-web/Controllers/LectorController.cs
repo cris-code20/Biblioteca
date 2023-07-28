@@ -6,6 +6,7 @@ using Biblioteca_web.Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Newtonsoft.Json;
 using System.Text;
+using Biblioteca_web.Models.Responses;
 
 namespace Biblioteca_web.Controllers
 {
@@ -20,7 +21,7 @@ namespace Biblioteca_web.Controllers
         }
         public ActionResult Index()
         {
-            LectorListResponse lectorReponse = new LectorListReponse();
+            LectorResponse lectorReponse = new LectorResponse();
 
             using (var httpClient = new HttpClient(this.httpClientHandler))
             {
@@ -30,13 +31,13 @@ namespace Biblioteca_web.Controllers
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
-                        lectorReponse = JsonConvert.DeserializeObject<LectorListResponse>(apiResponse);
+                        lectorReponse = JsonConvert.DeserializeObject<LectorResponse>(apiResponse);
                     }
 
 
                 }
             }
-            return View(LectorListResponse.data);
+            return View(lectorReponse.data);
         }
 
         public ActionResult Details(int id)
@@ -110,7 +111,7 @@ namespace Biblioteca_web.Controllers
             try
             {
 
-                var LectorAddResponse = new lectorAddResponse();
+                var LectorAddResponse = new LectorAddResponse();
 
 
 
@@ -118,7 +119,7 @@ namespace Biblioteca_web.Controllers
                 {
 
 
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(lectorAddResponse), Encoding.UTF8, "application/json");
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(LectorAddResponse), Encoding.UTF8, "application/json");
 
                     using (var response = httpClient.PostAsync("http://localhost:5037/api/Course/Update", content).Result)
                     {
