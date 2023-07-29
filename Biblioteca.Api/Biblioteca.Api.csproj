@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Biblioteca.Application\Biblioteca.Application.csproj" />
     <ProjectReference Include="..\Biblioteca.Infrestructure\Biblioteca.Infrestructure.csproj" />
+    <ProjectReference Include="..\Biblioteca.IOC\Biblioteca.IOC.csproj" />
   </ItemGroup>
 
 </Project>

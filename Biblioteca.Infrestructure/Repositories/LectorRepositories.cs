@@ -97,10 +97,6 @@ namespace Biblioteca.Infrestructure.Repositories
             List<LectorModel> lectors = new List<LectorModel>();
 
             try
-
-
-
-
             {
                 lectors = this.context.Lectores.Select(cu => new LectorModel()
                           {
