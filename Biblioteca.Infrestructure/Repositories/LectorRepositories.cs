@@ -102,14 +102,13 @@ namespace Biblioteca.Infrestructure.Repositories
 
 
             {
-                lectors = this.context.Lectores
-                    .Select(pre => new LectorModel()
-                    {
-                        IdLector = pre.IdLector,
-                        Nombre = pre.Nombre,
-                        Apellido = pre.Apellido,
-                        Correo = pre.Correo
-                    }).ToList();
+                lectors = this.context.Lectores.Select(cu => new LectorModel()
+                          {
+                              IdLector = cu.IdLector,
+                              Nombre = cu.Nombre,
+                              Apellido= cu.Apellido,
+                              Correo = cu.Correo,
+                          }).ToList();
             }
             catch (Exception ex)
             {
