@@ -1,13 +1,13 @@
-﻿using Biblioteca.Infrestructure.Module;
+﻿
 using Biblioteca.Domain.Repository;
 using Biblioteca.Infrestructure.Entities;
+using Biblioteca.Infrestructure.Module;
 
 namespace Biblioteca.Infrestructure.Interface
 {
     public interface ILector : IRepositoryBaseLector<Lector>
     {
-        dynamic GetById(int id);
-       List<Lector> GetLector(int IdLector);
-        List<Lector> GetLector();
+        LectorModel GetLectorById(int id);
+        List<LectorModel> GetLectors();
     }
 }

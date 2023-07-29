@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Biblioteca.Infrestructure.Repositories
 {
-    public class LectorRepositories : BaseRepository<Lector>
+    public class LectorRepositories : BaseRepository<Lector>, ILector
     {
 
         readonly ILogger<LectorRepositories> logger;
@@ -92,31 +92,7 @@ namespace Biblioteca.Infrestructure.Repositories
 
             return lectorModelss;
         }
-
-        public List<LectorModel> GetLector(int IdLector)
-        {
-            List<LectorModel> lector = new();
-
-            try
-            {
-                lector = this.context.Lectores
-                    .Select(pre => new LectorModel()
-                    {
-                        IdLector = pre.IdLector,
-                        Nombre = pre.Nombre,
-                        Apellido = pre.Apellido,
-                        Correo = pre.Correo
-                    }).ToList();
-            }
-            catch (Exception ex)
-            {
-                this.logger.LogError("Error no puedes obtener el lector", ex.ToString());
-
-            }
-
-            return lector;
-        }
-        public List<LectorModel> GetLector()
+        public List<LectorModel> GetLectors()
         {
             List<LectorModel> lectors = new List<LectorModel>();
 

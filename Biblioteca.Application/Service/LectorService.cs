@@ -30,7 +30,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data =  this.LectorRepository.GetLector();
+                result.Data =  this.LectorRepository.GetLectors();
             }
             catch (LectorException ex)
             {
@@ -55,7 +55,7 @@ namespace Biblioteca.Application.Service
 
             try
             {
-                result.Data = this.LectorRepository.GetById(id);
+                result.Data = this.LectorRepository.GetLectorById(id);
             }
             catch (LectorException dex)
             {
@@ -115,6 +115,12 @@ namespace Biblioteca.Application.Service
             if (model.Nombre.Length > 50)
             {
                 result.Message = "El nombre del lector tiene la logitud invalida.";
+                result.Success = false;
+                return result;
+            }
+            if (string.IsNullOrEmpty(model.Codigo))
+            {
+                result.Message = "El codigo es requerido.";
                 result.Success = false;
                 return result;
             }
@@ -216,6 +222,12 @@ namespace Biblioteca.Application.Service
             if (model.Nombre.Length > 50)
             {
                 result.Message = "El nombre del lector tiene la logitud invalida.";
+                result.Success = false;
+                return result;
+            }
+            if (string.IsNullOrEmpty(model.Codigo))
+            {
+                result.Message = "El codigo es requerido.";
                 result.Success = false;
                 return result;
             }
