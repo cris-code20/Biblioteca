@@ -6,6 +6,7 @@ using Biblioteca.Infrestructure.Interface;
 using Biblioteca.Infrestructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Biblioteca.IOC.Dependencies;
 
 internal class Program
 {
@@ -21,10 +22,11 @@ internal class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<Bibliotecacontext>(options => options.UseSqlServer
                                                          (builder.Configuration.GetConnectionString("BibliotecaContext")));
-        builder.Services.AddTransient<ILector, LectorRepositories>();
-        builder.Services.AddTransient<ILectorService, LectorService>();
+		builder.Services.AddTransient<ILector, LectorRepositories>();
+		builder.Services.AddTransient<ILectorService, LectorService>();
 
-        var app = builder.Build();
+
+		var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

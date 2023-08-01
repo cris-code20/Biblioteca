@@ -26,7 +26,7 @@ namespace Biblioteca_web.Controllers
             using (var httpClient = new HttpClient(this.httpClientHandler))
             {
 
-                using (var response = httpClient.GetAsync("http://localhost:5292/api/Lector").Result)
+                using (var response = httpClient.GetAsync("http://localhost:5292/api/Lector/GetLectors").Result)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -42,23 +42,23 @@ namespace Biblioteca_web.Controllers
 
         public ActionResult Details(int id)
         {
-            LectorDetailResponse courseDetailResponse = new LectorDetailResponse();
+            LectorDetailResponse lectorDetailResponse = new LectorDetailResponse();
 
             using (var httpClient = new HttpClient(this.httpClientHandler))
             {
 
-                using (var response = httpClient.GetAsync("http://localhost:5037/api/Course/GetCourse?id=" + id).Result)
+                using (var response = httpClient.GetAsync("http://localhost:5037/api/Lector/GetLector?id=" + id).Result)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
-                        courseDetailResponse = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
+                        lectorDetailResponse = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
                     }
 
 
                 }
             }
-            return View(courseDetailResponse.data);
+            return View(lectorDetailResponse.data);
         }
 
         // GET: CourseController/Create
@@ -90,7 +90,7 @@ namespace Biblioteca_web.Controllers
             using (var httpClient = new HttpClient(this.httpClientHandler))
             {
 
-                using (var response = httpClient.GetAsync("http://localhost:5292/api/Lector" + id).Result)
+                using (var response = httpClient.GetAsync("http://localhost:5037/api/Lector/GetLector?id=" + id).Result)
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -121,7 +121,7 @@ namespace Biblioteca_web.Controllers
 
                     StringContent content = new StringContent(JsonConvert.SerializeObject(LectorAddResponse), Encoding.UTF8, "application/json");
 
-                    using (var response = httpClient.PostAsync("http://localhost:5037/api/Course/Update", content).Result)
+                    using (var response = httpClient.PostAsync("http://localhost:5037/api/Lector/Update", content).Result)
                     {
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
 
