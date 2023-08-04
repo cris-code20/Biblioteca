@@ -1,6 +1,7 @@
 using Biblioteca.Infrestructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.IOC.Dependencies;
+using Biblioteca_web.Services;
 
 
 
@@ -11,6 +12,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Bibliotecacontext>(options => options.UseSqlServer
                                                         (builder.Configuration.GetConnectionString("BibliotecaContext")));
 builder.Services.AddLectorDependency();
+builder.Services.AddHttpClient();
+builder.Services.AddTransient<ILectorApiService, LectorApiService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
