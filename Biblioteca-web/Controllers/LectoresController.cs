@@ -33,7 +33,7 @@ namespace Biblioteca_web.Controllers
 			{
 			    using (var httpClient = this.httpClientFactory.CreateClient())
 			    {
-			        using (var response = httpClient.GetAsync($"{this.baseUrl}/Course/GetLectores").Result)
+			        using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/GetLectores").Result)
 			        {
 			            if (response.IsSuccessStatusCode)
 			            {

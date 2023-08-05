@@ -8,7 +8,7 @@ namespace Biblioteca_web.Services
 		LectorDetailResponse GetLector(int id);
 		LectorListResponse GetLectores();
 		LectorUpdateResponse Update(LectorUpdateDto lectorUpdateDto);
-		LectorSaveResponse Save(LectorAddDto lectorAddDto);
+		LectorSaveResponse Save(LectorDto lectorAddDto);
 
 	}
 }

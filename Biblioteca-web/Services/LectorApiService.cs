@@ -1,166 +1,147 @@
-﻿using Biblioteca_web.Services;
-using Newtonsoft.Json;
+﻿using Biblioteca.Application.Dtos.Lector;
 using Biblioteca.Application.Dtos.Lector;
-using Biblioteca.Infrestructure.Module;
-using Biblioteca_web.Controllers;
 using Biblioteca_web.Models.Responses;
+using Biblioteca_web.Services;
+using Newtonsoft.Json;
+using System.Net.Http;
 using System.Text;
 
-namespace Biblioteca_web.Services
+namespace Biblioteca_web.Servicess
 {
-	public class LectorApiService : ILectorApiService
-	{
-		private readonly IHttpClientFactory httpClientFactory;
-		private readonly IConfiguration configuration;
-		private readonly ILogger<LectorApiService> logger;
-		private string baseUrl = string.Empty;
-		public LectorApiService(IHttpClientFactory httpClientFactory,
-							   IConfiguration configuration,
-							   ILogger<LectorApiService> logger)
-		{
-			this.httpClientFactory = httpClientFactory;
-			this.configuration = configuration;
-			this.logger = logger;
-			this.baseUrl = configuration["ApiConfig:baseUrl"];
-		}
+    public class LectorApiService : ILectorApiService
 
-		public LectorDetailResponse GetLector(int id)
-		{
-			LectorDetailResponse lectorDetailResponse = new LectorDetailResponse();
+    {
 
+        private readonly IHttpClientFactory httpClientFactory;
+        private readonly IConfiguration configuration;
+        private readonly ILogger<LectorApiService> logger;
+        private string baseUrl = string.Empty;
+        public LectorDetailResponse lectordetail;
+        public LectorListResponse listReponse;
+        public LectorUpdateResponse updateResponse;
+        public LectorSaveResponse lectorSave;
 
-			try
-			{
-				using (var httpClient = this.httpClientFactory.CreateClient())
-				{
-					using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/GetLector?id={id}").Result)
-					{
-						if (response.IsSuccessStatusCode)
-						{
-							string apiResponse = response.Content.ReadAsStringAsync().Result;
-							lectorDetailResponse = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
-						}
-						else
-						{
-							lectorDetailResponse.success = false;
-							lectorDetailResponse.message = "Error conectandose al api de lector";
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				lectorDetailResponse.success = false;
-				lectorDetailResponse.message = "Error obteniendo los lectores";
-				this.logger.LogError($"{lectorDetailResponse.message}", ex.ToString());
-
-			}
-			return lectorDetailResponse;
-		}
-
-		public LectorListResponse GetLectores()
-		{
-			LectorListResponse lectorResponse = new LectorListResponse();
-
-			try
-			{
-				using (var httpClient = this.httpClientFactory.CreateClient())
-				{
-					using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/GetLectores").Result)
-					{
-						if (response.IsSuccessStatusCode)
-						{
-							string apiResponse = response.Content.ReadAsStringAsync().Result;
-							lectorResponse = JsonConvert.DeserializeObject<LectorListResponse>(apiResponse);
-						}
-						else
-						{
-							lectorResponse.success = false;
-							lectorResponse.message = "Error conectandose al api de lector";
-
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				lectorResponse.success = false;
-				lectorResponse.message = "Error obteniendo los lectores";
-				this.logger.LogError($"{lectorResponse.message}", ex.ToString());
-
-			}
-			return lectorResponse;
-		}
-
-		public LectorSaveResponse Save(LectorAddDto lectorAddDto)
-		{
-			LectorSaveResponse lectorSaveResponse = new LectorSaveResponse();
-
-			try
-			{
-				using (var httpClient = this.httpClientFactory.CreateClient())
-				{
-					StringContent content = new StringContent(JsonConvert.SerializeObject(lectorAddDto), Encoding.UTF8, "application/json");
+        public LectorApiService(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<LectorApiService> logger)
+        {
+            this.httpClientFactory = httpClientFactory;
+            this.configuration = configuration;
+            this.logger = logger;
+            this.baseUrl = configuration["ApiConfig:baseUrl"];
+        }
 
 
-					using (var response = httpClient.PostAsync($"{this.baseUrl}/Lector/Save", content).Result)
-					{
-						if (response.IsSuccessStatusCode)
-						{
-							string apiResponse = response.Content.ReadAsStringAsync().Result;
 
-							lectorSaveResponse = JsonConvert.DeserializeObject<LectorSaveResponse>(apiResponse);
-						}
-						else
-						{
+        public LectorDetailResponse GetLector(int id)
+        {
+            try
+            {
+                using (var httpClient = this.httpClientFactory.CreateClient())
+                {
+                    using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/GetLector?id={id}").Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = response.Content.ReadAsStringAsync().Result;
+                            lectordetail = JsonConvert.DeserializeObject<LectorDetailResponse>(apiResponse);
+                        }
 
-							lectorSaveResponse.success = false;
-							lectorSaveResponse.message = "Error conectandose al api de lector";
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				lectorSaveResponse.success = false;
-				lectorSaveResponse.message = "Error guardando el lector.";
-				this.logger.LogError($"{lectorSaveResponse.message}", ex.ToString());
-			}
-			return lectorSaveResponse;
-		}
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lectordetail.success = false;
+                lectordetail.message = "Error obteniendo los cursos";
+                this.logger.LogError($"{lectordetail.message}", ex.ToString());
 
-		public LectorUpdateResponse Update(LectorUpdateDto lectorUpdateDto)
-		{
-			LectorUpdateResponse lectorUpdateResponse = new LectorUpdateResponse();
+            }
+            return lectordetail;
+        }
 
-			try
-			{
-				using (var httpClient = this.httpClientFactory.CreateClient())
-				{
-					using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/Update").Result)
-					{
-						if (response.IsSuccessStatusCode)
-						{
-							string apiResponse = response.Content.ReadAsStringAsync().Result;
-							lectorUpdateResponse = JsonConvert.DeserializeObject<LectorUpdateResponse>(apiResponse);
-						}
-						else
-						{
-							lectorUpdateResponse.success = false;
-							lectorUpdateResponse.message = "Error conectandose al api de lector";
+        public LectorListResponse GetLectores()
+        {
+            try
+            {
+                using (var httpClient = this.httpClientFactory.CreateClient())
+                {
+                    using (var response = httpClient.GetAsync($"{this.baseUrl}/Lector/GetLector").Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = response.Content.ReadAsStringAsync().Result;
+                            listReponse = JsonConvert.DeserializeObject<LectorListResponse>(apiResponse);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                listReponse.success = false;
+                listReponse.message = "Error obteniendo los cursos";
+                this.logger.LogError($"{listReponse.message}", ex.ToString());
 
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				lectorUpdateResponse.success = false;
-				lectorUpdateResponse.message = "Error obteniendo los lectores";
-				this.logger.LogError($"{lectorUpdateResponse.message}", ex.ToString());
+            }
+            return listReponse;
+        }
 
-			}
-			return lectorUpdateResponse;
-		}
-	}
+        public LectorSaveResponse Save(LectorDto prestamoAdd)
+        {
+            try
+            {
+                using (var httpClient = this.httpClientFactory.CreateClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(prestamoAdd), Encoding.UTF8, "application/json");
+
+
+                    using (var response = httpClient.PostAsync($"{this.baseUrl}/Lector/Save", content).Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = response.Content.ReadAsStringAsync().Result;
+
+                            lectorSave = JsonConvert.DeserializeObject<LectorSaveResponse>(apiResponse);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                lectorSave.success = false;
+                lectorSave.message = "Error guardando el curso.";
+                this.logger.LogError($"{lectorSave.message}", ex.ToString());
+            }
+            return lectorSave;
+        }
+
+        public LectorUpdateResponse Update(LectorUpdateDto lectorUpdate)
+        {
+
+            try
+            {
+                using (var httpClient = this.httpClientFactory.CreateClient())
+                {
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(lectorUpdate), Encoding.UTF8, "application/json");
+
+
+                    using (var response = httpClient.PostAsync($"{this.baseUrl}/Lector/Save", content).Result)
+                    {
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string apiResponse = response.Content.ReadAsStringAsync().Result;
+
+                            updateResponse = JsonConvert.DeserializeObject<LectorUpdateResponse>(apiResponse);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                updateResponse.success = false;
+                updateResponse.message = "Error guardando el curso.";
+                this.logger.LogError($"{updateResponse.message}", ex.ToString());
+            }
+            return updateResponse;
+
+        }
+    }
 }
