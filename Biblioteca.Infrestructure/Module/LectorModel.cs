@@ -2,7 +2,7 @@
 
 namespace Biblioteca.Infrestructure.Module
 {
-	public class LectorModel
+	public class LectorModelS
 	{
         public int IdLector { get; set; }
         public string? Nombre { get; set; }

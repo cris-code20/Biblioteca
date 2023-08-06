@@ -2,6 +2,6 @@
 {
 	public class LectorListResponse : BaseResponse
 	{
-		public List<LectorModel> data { get; set; }	
+		public List<LectorModels> data { get; set; }	
 	}
 }

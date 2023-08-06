@@ -7,7 +7,7 @@ namespace Biblioteca.Infrestructure.Interface
 {
     public interface ILector : IRepositoryBaseLector<Lector>
     {
-        LectorModel GetLectorById(int id);
-        List<LectorModel> GetLectors();
+        LectorModelS GetLectorById(int id);
+        List<LectorModelS> GetLectors();
     }
 }

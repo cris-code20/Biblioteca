@@ -1,6 +1,6 @@
 ﻿namespace Biblioteca_web.Models
 {
-    public class LectorModel
+    public class LectorModels
     {
         public int IdLector { get; set; }
         public string? Nombre { get; set; }

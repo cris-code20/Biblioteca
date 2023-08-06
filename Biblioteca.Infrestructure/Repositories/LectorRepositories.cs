@@ -73,9 +73,9 @@ namespace Biblioteca.Infrestructure.Repositories
             }
         }
 
-        public LectorModel GetLectorById(int id)
+        public LectorModelS GetLectorById(int id)
         {
-            LectorModel lectorModelss = new LectorModel();
+            LectorModelS lectorModelss = new LectorModelS();
 
             try
             {
@@ -92,13 +92,13 @@ namespace Biblioteca.Infrestructure.Repositories
 
             return lectorModelss;
         }
-        public List<LectorModel> GetLectors()
+        public List<LectorModelS> GetLectors()
         {
-            List<LectorModel> lectors = new List<LectorModel>();
+            List<LectorModelS> lectors = new List<LectorModelS>();
 
             try
             {
-                lectors = this.context.Lectores.Select(cu => new LectorModel()
+                lectors = this.context.Lectores.Select(cu => new LectorModelS()
                           {
                               IdLector = cu.IdLector,
                               Nombre = cu.Nombre,

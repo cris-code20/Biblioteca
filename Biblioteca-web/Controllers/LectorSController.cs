@@ -24,7 +24,7 @@ namespace Biblioteca_web.Controllers
 
             }
 
-            var lecstor = (List<LectorModel>)result.Data;
+            var lecstor = (List<LectorModelS>)result.Data;
 
             return View(lecstor);
 

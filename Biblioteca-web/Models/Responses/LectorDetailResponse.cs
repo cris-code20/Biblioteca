@@ -2,7 +2,7 @@
 {
     public class LectorDetailResponse : BaseResponse
     {
-        public LectorModel? data { get; set; }
+        public LectorModels? data { get; set; }
     }
     public class LectorAddResponse : BaseResponse
     {
